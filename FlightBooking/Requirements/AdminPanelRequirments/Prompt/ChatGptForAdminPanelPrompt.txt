@@ -1,0 +1,235 @@
+﻿Claude Prompt
+
+Sen deneyimli bir UI/UX geliştiricisi ve frontend mimarısın.
+Modern bir havayolu yönetim sistemi (Airline Admin Panel) için admin paneli arayüzü tasarlamanı istiyorum.
+
+Bu admin paneli bir uçuş rezervasyon ve biletleme sisteminin yönetim panelidir. Arayüz modern, profesyonel ve kurumsal bir havayolu şirketine uygun olmalıdır.
+
+Kodları HTML + CSS + Bootstrap 5 + JavaScript kullanarak üretmelisin.
+Kod tek bir HTML dosyasında yazılmalı ve çalıştırıldığında arayüz direkt görüntülenebilmelidir.
+
+Genel Tasarım Kuralları
+
+Arayüz:
+
+modern
+
+temiz
+
+profesyonel
+
+kurumsal
+
+responsive
+
+olmalıdır.
+
+Tasarımda:
+
+Bootstrap 5
+
+modern ikonlar (FontAwesome veya Bootstrap Icons)
+
+hover efektleri
+
+modern buton tasarımları
+
+badge ve status etiketleri
+
+gölgeli kart yapıları
+
+kullanılmalıdır.
+
+Renk paleti kurumsal havayolu firmalarına uygun olmalıdır.
+
+Önerilen renkler:
+
+koyu lacivert
+
+beyaz
+
+açık gri
+
+vurgu rengi olarak mavi
+
+Layout Yapısı
+
+Admin paneli 3 ana bölümden oluşmalıdır
+
+1️⃣ Sidebar (Sol Menü)
+
+Sol tarafta sabit bir sidebar menü olmalıdır.
+
+Sidebar özellikleri:
+
+ikonlu menü
+
+collapsible alt menüler
+
+modern görünüm
+
+hover efektleri
+
+aktif menü vurgusu
+
+Sidebar menüleri:
+
+Dashboard
+Flights
+Destinations
+Aircraft Fleet
+Passengers
+Bookings
+Check-In Management
+Offers & Discounts
+Reports
+Settings
+
+Sidebar responsive olmalı ve küçük ekranlarda collapse olabilmelidir.
+
+2️⃣ Navbar (Üst Menü)
+
+Sayfanın üst kısmında modern bir navbar bulunmalıdır.
+
+Navbar içinde:
+
+sistem arama alanı
+
+bildirim ikonu
+
+mesaj ikonu
+
+kullanıcı profil menüsü
+
+kullanıcı avatarı
+
+yer almalıdır.
+
+3️⃣ Content Area
+
+Ana içerik alanı Flights Management sayfası olacaktır.
+
+Bu sayfa uçuş yönetimi için bir tablo arayüzü içermelidir.
+
+Sayfanın üst kısmında:
+
+Başlık:
+
+Flights Management
+
+Alt açıklama:
+
+Sistemde kayıtlı uçuşları görüntüleyebilir, düzenleyebilir veya yeni uçuş ekleyebilirsiniz.
+
+Sağ tarafta bir buton bulunmalıdır:
+
+Yeni Uçuş Ekle
+
+Flights Table
+
+Sayfanın ana kısmında modern bir Bootstrap table bulunmalıdır.
+
+Tablo özellikleri:
+
+zebra table
+
+hover efekti
+
+responsive
+
+modern badge tasarımı
+
+pagination
+
+search alanı
+
+Tablo kolonları:
+
+Uçuş No
+Kalkış Şehri
+Varış Şehri
+Kalkış Saati
+Varış Saati
+Uçak Modeli
+Kapı (Gate)
+Durum
+İşlemler
+
+Tablo Demo Verileri
+
+Tablodaki veriler Türkçe olmalıdır.
+
+Örnek veri satırları:
+
+TK102 – İstanbul – Paris – 10:30 – 13:00 – Airbus A320 – G12 – Boarding
+TK215 – İstanbul – Roma – 11:15 – 13:30 – Boeing 737 – G5 – Planlandı
+TK330 – İstanbul – Londra – 12:40 – 15:10 – Airbus A321 – G8 – Gecikmeli
+TK450 – İstanbul – Berlin – 14:20 – 16:50 – Boeing 737 – G2 – İptal
+
+Status Badge Tasarımı
+
+Durum alanı için modern badge tasarımı kullanılmalıdır.
+
+Planlandı → mavi badge
+Boarding → yeşil badge
+Gecikmeli → sarı badge
+İptal → kırmızı badge
+
+Action Butonları
+
+Her satırın sonunda işlem butonları olmalıdır.
+
+Butonlar:
+
+Görüntüle
+Düzenle
+Sil
+
+Butonlar ikonlu olmalıdır.
+
+Ek Özellikler
+
+Tablonun üst kısmında:
+
+Arama kutusu
+Filtreleme dropdown (Duruma göre filtreleme)
+
+bulunmalıdır.
+
+Tablonun altında:
+
+Pagination
+
+yer almalıdır.
+
+UI Detayları
+
+butonlar modern olmalı
+
+ikonlar kullanılmalı
+
+hover animasyonları olmalı
+
+responsive tasarım olmalı
+
+content alanı kart (card) yapısında olmalı
+
+sidebar ve navbar profesyonel bir admin panel görünümünde olmalı
+
+Kod Yapısı
+
+Tek bir HTML dosyası oluştur.
+
+Kod içinde:
+
+Bootstrap CDN
+
+FontAwesome CDN
+
+gerekli CSS stilleri
+
+gerekli JavaScript
+
+bulunmalıdır.
+
+Kod düzenli, okunabilir ve yorum satırları içermelidir.

@@ -1,0 +1,184 @@
+﻿Aşağıda sana bir ASP.NET Core MVC projesinde, ViewComponent içinde kullanılan mevcut booking-area kodunu vereceğim. Bu alan bir default partial view içinde yer alıyor ve amacı bir havayolu / uçuş rezervasyon sisteminin ana rezervasyon modülünü göstermek.
+
+Senden istediğim şey mevcut yapıyı tamamen daha modern, premium, kullanıcı dostu ve dinamik bir hale getirmen. Çıktın doğrudan Razor / HTML tabanlı olmalı. Gerekirse CSS class yapısını daha güçlü hale getir ama mantıksız derecede karmaşıklaştırma. Kod, gerçek bir uçuş rezervasyon sitesindeki gibi görünmeli. THY, Pegasus, Ryanair, Wizzair, Skyscanner ve benzeri sistemlerin UX mantığından ilham alabilirsin. Tasarım güncel, temiz, profesyonel ve “premium travel booking widget” hissi vermeli.
+
+KRİTİK KURALLAR:
+- Bu yapı bir ASP.NET Core MVC ViewComponent partial içinde kullanılacak.
+- Çıktı Razor/HTML uyumlu olmalı.
+- Bootstrap tab yapısını koruyabilirsin ama sekme içerikleri çok daha modern hale gelmeli.
+- Kod tek parça halinde gelsin.
+- Açıklama yapma, sadece çalışılabilir kod ver.
+- Mevcut sekme mantığını koru:
+  1. Uçuş Ara
+  2. Seyahatlerim
+  3. Online Check-in
+  4. Uçuş Durumu
+- Her sekmenin content alanı birbirinden farklı ve amaca uygun olmalı.
+- Statik ve sıradan input görüntüsünden uzaklaş.
+- UI daha zengin, kart yapılı, ikon destekli, boşluk/padding dengesi güçlü, modern border-radius ve hover etkileri olan bir yapıda olsun.
+- Gerekirse küçük yardımcı alanlar, badge, info text, toggle, mini açıklamalar ekle.
+- Ama aşırı abartılı ve dağınık olmasın.
+- Ürettiğin yapı responsive mantığa uygun olsun.
+
+ÖZEL İSTEKLERİM:
+
+1) UÇUŞ ARA SEKME İÇERİĞİ
+Bu sekme en güçlü ve en modern alan olmalı.
+
+İçerikte şu alanlar olmalı:
+- Nereden
+- Nereye
+- Yolculuk Tipi
+- Gidiş Tarihi
+- Dönüş Tarihi
+- Yolcu / Sınıf
+- Promosyon Kodu
+
+Ama bunlar klasik form yapısında görünmemeli. Daha modern bir rezervasyon widget’ı gibi kurgula.
+
+DETAYLAR:
+- “Nereden” ve “Nereye” alanları klasik input değil, modern dropdown / searchable select gibi görünmeli.
+- Her birinde şehir + havalimanı mantığı hissedilsin.
+- Örnek placeholder’lar modern olsun:
+  - İstanbul, Türkiye
+  - Londra, Birleşik Krallık
+- Arada yön değiştirme (swap/exchange) butonu modern ve dikkat çekici olsun.
+- Yolculuk Tipi alanı segmented control / modern select gibi görünebilir:
+  - Tek Yön
+  - Gidiş - Dönüş
+  - Çoklu Uçuş
+- Gidiş ve dönüş tarih alanları modern date picker görünümünde tasarlansın.
+- Dönüş tarihi alanı, tek yön seçiminde pasif / disabled mantığına uygun görünebilir.
+- “Yolcu / Sınıf” alanı klasik input olmasın.
+- Buna tıklanınca mini açılır panel / dropdown panel görünsün.
+- Bu panel içinde şu sayaç alanları bulunsun:
+  - Yetişkin
+  - Çocuk
+  - Bebek (0-2 Yaş)
+- Her biri için + ve - butonları olsun.
+- Ayrıca kabin sınıfı seçimi de olsun:
+  - Ekonomi
+  - Premium Ekonomi
+  - Business
+- Açılır panel modern kart görünümünde olsun.
+- “Promosyon Kodu Kullan” alanı başlangıçta link / tetikleyici gibi görünsün.
+- Buna tıklanınca aşağıda ya da ilgili alanda bir input açılıp promosyon kodu girilebilsin.
+- Alt tarafta CTA alanı çok güçlü olsun.
+- “Uçuşları Listele” butonu büyük, modern ve premium görünsün.
+- İstersen yanına “Fiyat Takvimi”, “Esnek Tarihler” veya “Direkt Uçuşlar” gibi mini opsiyonlar da ekleyebilirsin.
+- Sekme içeriği kart/panel içinde çok şık görünmeli.
+
+2) SEYAHATLERİM SEKME İÇERİĞİ
+Bu alan mevcut haliyle fazla basit. Bunu daha modern ve dinamik yap.
+
+Burada olabilecek alanlar:
+- Rezervasyon Kodu (PNR)
+- Soyad
+- Bilet Numarası ile Sorgula seçeneği
+- E-posta ile rezervasyon bulma seçeneği
+
+İSTEDİĞİM YAPI:
+- Bu sekme bir “trip management” paneli gibi görünsün.
+- Üstte kısa bir yönlendirme metni olabilir.
+- Kullanıcı ister PNR + Soyad ile, ister Bilet No ile, ister E-posta ile rezervasyonunu bulabilsin.
+- Bunu modern tab alt yapısı, radio selection veya kart seçimi mantığıyla çözebilirsin.
+- Örneğin kullanıcı önce sorgu yöntemini seçsin:
+  - PNR ile Sorgula
+  - Bilet Numarası ile Sorgula
+  - E-posta ile Sorgula
+- Sonra seçilen yönteme göre ilgili alanlar görünsün.
+- Buton metni örneğin:
+  - Seyahatimi Görüntüle
+  - Rezervasyonumu Bul
+- Alt tarafta küçük yardım linkleri olabilir:
+  - PNR kodumu bilmiyorum
+  - Rezervasyon değişikliği
+  - İade / iptal işlemleri
+
+3) ONLINE CHECK-IN SEKME İÇERİĞİ
+Bu alan da daha premium ve dinamik olmalı.
+
+Burada kullanıcıya check-in için modern bir akış hissi ver.
+Alanlar:
+- Rezervasyon Kodu
+- Soyad
+- Alternatif olarak Bilet Numarası
+
+İSTEKLER:
+- Yine tekdüze iki input olmasın.
+- “Check-in işlemini başlatın” hissi veren, açıklama metni olan modern bir kart yapısı olsun.
+- Kullanıcı giriş yöntemi seçebilsin:
+  - PNR + Soyad
+  - Bilet Numarası + Soyad
+- Uygun bir bilgi alanı eklenebilir:
+  - Online check-in uçuş saatinden X saat önce başlar
+  - Koltuk seçimi ve biniş kartı işlemleri yapılabilir
+- “Check-in Yap” butonu güçlü ve dikkat çekici olsun.
+- İstersen yanında mini ikonlu bilgi kutuları da ekleyebilirsin:
+  - Koltuk Seçimi
+  - Bagaj Bilgisi
+  - Mobil Biniş Kartı
+
+4) UÇUŞ DURUMU SEKME İÇERİĞİ
+Bu sekme de çok daha modern olmalı.
+
+Alanlar:
+- Uçuş Numarası ile sorgulama
+- Kalkış / Varış noktasına göre sorgulama
+- Tarih seçimi
+
+İSTEKLER:
+- Kullanıcı iki farklı sorgulama yöntemi arasında geçiş yapabilsin:
+  - Uçuş Numarası
+  - Rota Bazlı Arama
+- Eğer uçuş numarası seçilirse:
+  - Uçuş Numarası
+  - Tarih
+- Eğer rota bazlı arama seçilirse:
+  - Nereden
+  - Nereye
+  - Tarih
+- Bu bölüm bir “live flight tracker” hissi versin.
+- Altında küçük bilgi kartları olabilir:
+  - Gecikmeler
+  - Kapı Bilgisi
+  - Tahmini Kalkış
+  - Tahmini Varış
+- “Uçuşu Sorgula” butonu premium görünsün.
+
+5) TASARIM DİLİ
+- Modern airline booking widget estetiği kullan.
+- Daha fazla rounded corner kullan.
+- Soft shadow kullan.
+- Temiz border yapıları olsun.
+- Hover ve active state hissi veren class yapıları oluştur.
+- İkon kullanımı güçlü olsun.
+- Boşluklar iyi ayarlansın.
+- Form alanları sıkışık görünmesin.
+- Mobilde alt alta, desktopta dengeli grid yapısı olsun.
+- Gerekirse bazı alanları row/col mantığıyla böl.
+- Sekmeler daha premium görünsün.
+- Aktif sekme daha belirgin olsun.
+- Tüm metinler Türkçe olsun.
+
+6) TEKNİK YAPI
+- Kod tek parça olarak gelsin.
+- Gereksiz açıklama ekleme.
+- Sadece kod ver.
+- Razor syntax ile uyumlu olsun.
+- İstersen bazı alanlara id/class vererek sonradan JS ile geliştirilebilir hale getir.
+- Butonlarda href yerine gerekiyorsa button kullan.
+- Form alanları semantik açıdan daha doğru olsun.
+- Mümkün olduğunca production’a yakın bir frontend iskeleti oluştur.
+
+AŞAĞIYA MEVCUT KODU BIRAKIYORUM.
+BU KODU REFERANS ALARAK AYNI AMACI KORUYAN AMA ÇOK DAHA MODERN VE GELİŞMİŞ BİR VERSİYON ÜRET:
+
+[BURAYA KENDİ MEVCUT BOOKING-AREA KODUMU YAPIŞTIRACAĞIM]
+
+Beklediğim çıktı:
+- Sadece geliştirilmiş final kod
+- Açıklama yok
+- Tek parça
+- Modern, premium, dinamik hissi güçlü
+- Her sekme birbirinden farklı ve gerçekten amaca uygun
