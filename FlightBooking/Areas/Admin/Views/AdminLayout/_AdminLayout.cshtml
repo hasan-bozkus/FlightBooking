@@ -1,0 +1,44 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="tr">
+
+    @await Component.InvokeAsync("_AdminLayoutHeadComponentPartial")
+
+<body>
+
+<!-- ================================================================
+     SIDEBAR
+================================================================ -->
+    @await Component.InvokeAsync("_AdminLayoutSidebarComponentPartial")
+
+<!-- ================================================================
+     TOPBAR
+================================================================ -->
+    @await Component.InvokeAsync("_AdminLayoutTopbarComponentPartial")
+
+<!-- ================================================================
+     MAIN CONTENT
+================================================================ -->
+<main class="main-content" id="main-content">
+
+        @RenderBody()
+</main>
+
+<!-- Toast Container -->
+<div class="toast-container-custom" id="toastContainer"></div>
+
+<!-- ================================================================
+     SCRIPTS
+================================================================ -->
+    @await Component.InvokeAsync("_AdminLayoutScriptsComponentPartial")
+
+
+</body>
+</html>
+
+

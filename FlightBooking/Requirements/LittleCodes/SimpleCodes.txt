@@ -1,0 +1,29 @@
+﻿<a asp-area="Admin"
+   asp-controller="Bookings"
+   asp-action="CreateBooking"
+   asp-route-flightId="@f.FlightId"
+   class="act act-create">
+    <i class="bi bi-ticket-perforated-fill"></i>
+    <span class="act-label">Rezervasyon Yap</span>
+</a>
+
+------------------------------------------
+
+  <a asp-area="Admin"
+           asp-controller="Bookings"
+           asp-action="Create"
+           asp-route-flightId="@f.FlightId"
+           class="act act-book">
+            <i class="bi bi-ticket-perforated-fill"></i>
+            <span class="act-label">Rezerve Et</span>
+        </a>
+
+
+        .act-book {
+    background: #f0fdf4;
+    color: #16a34a;
+    border-color: #bbf7d0;
+}
+.act-book:hover { background: #dcfce7; color: #15803d; }
+
+------------------------------------------------------
