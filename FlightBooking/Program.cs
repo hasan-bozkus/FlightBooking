@@ -1,6 +1,8 @@
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+
+builder.Services.AddAutoMapper(cfg => cfg.AddMaps(typeof(Program).Assembly)); // AutoMapper'ın 14+ sürümü için güncellenen yapılandırma formatı.
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
