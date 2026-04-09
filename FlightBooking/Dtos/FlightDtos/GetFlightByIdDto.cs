@@ -1,6 +1,6 @@
 ﻿namespace FlightBooking.Dtos.FlightDtos
 {
-    public class GetFlightDto
+    public class GetFlightByIdDto
     {
         public string FlightId { get; set; }
         public string FlightNumber { get; set; }

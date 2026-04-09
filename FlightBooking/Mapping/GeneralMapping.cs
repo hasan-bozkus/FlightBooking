@@ -11,7 +11,7 @@ namespace FlightBooking.Mapping
             CreateMap<Flight, ResultFlightDto>().ReverseMap();
             CreateMap<Flight, CreateFlightDto>().ReverseMap();
             CreateMap<Flight, UpdateFlightDto>().ReverseMap();
-            CreateMap<Flight, GetFlightDto>().ReverseMap();
+            CreateMap<Flight, GetFlightByIDDto>().ReverseMap();
         }
     }
 }
