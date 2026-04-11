@@ -7,6 +7,8 @@
 
 @await Component.InvokeAsync("_AdminLayoutHeadComponentPartial")
 
+@RenderSection("Styles", false)
+
 <body>
 
     @await Component.InvokeAsync("_AdminLayoutSidebarComponentPartial")
@@ -23,5 +25,8 @@
 
     @await Component.InvokeAsync("_AdminLayoutScriptsComponentPartial")
 
+    @RenderSection("Scripts", false)
+
 </body>
 </html>
+

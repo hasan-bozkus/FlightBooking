@@ -1,7 +1,19 @@
+using FlightBooking.Services.FilghtServices;
+using FlightBooking.Settings;
+using Microsoft.Extensions.Options;
+
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("DatabaseSettings"));
 
 builder.Services.AddAutoMapper(cfg => cfg.AddMaps(typeof(Program).Assembly)); // AutoMapper'ın 14+ sürümü için güncellenen yapılandırma formatı.
+
+builder.Services.AddScoped<IFlightService, FlightService>();
+
+builder.Services.AddScoped<IDatabaseSettings>(sp =>
+{
+    return sp.GetRequiredService<IOptions<DatabaseSettings>>().Value;
+});
 
 builder.Services.AddControllersWithViews();
 
