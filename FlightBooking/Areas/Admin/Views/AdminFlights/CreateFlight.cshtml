@@ -4,7 +4,7 @@
     Layout = "~/Areas/Admin/Views/AdminLayout/_AdminLayout.cshtml";
 }
 
-@section Scripts {
+@section Styles {
 <style>
 
     /* ── Create Page Layout ──────────────────────────────────── */
@@ -365,8 +365,6 @@
 </style>
 }
 
-<main class="main-content" id="main-content">
-
     @* ── Page Header ─────────────────────────────────────────── *@
     <div class="page-header">
         <div class="page-title-group">
@@ -397,7 +395,7 @@
     }
 
     @* ── FORM ─────────────────────────────────────────────────── *@
-    <form asp-area="Admin" asp-controller="Flights" asp-action="Create"
+    <form asp-area="Admin" asp-controller="AdminFlights" asp-action="CreateFlight"
           method="post" id="flightForm" novalidate>
         @Html.AntiForgeryToken()
 
@@ -864,8 +862,6 @@
 
         </div>
     </form>
-
-</main>
 
 @section Scripts {
 <partial name="_ValidationScriptsPartial" />
