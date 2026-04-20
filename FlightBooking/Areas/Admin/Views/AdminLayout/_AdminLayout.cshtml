@@ -2,31 +2,37 @@
     Layout = null;
 }
 
+
 <!DOCTYPE html>
 <html lang="tr">
+<head>
+    @* ── Meta, Bootstrap CSS, Bootstrap Icons, Google Fonts, global <style> ── *@
+    @await Component.InvokeAsync("_AdminLayoutHeadComponentPartial")
 
-@await Component.InvokeAsync("_AdminLayoutHeadComponentPartial")
-
-@RenderSection("Styles", false)
-
+    @* ── Sayfa bazlı <style> blokları buraya inject edilir ─────────────────── *@
+    @RenderSection("Styles", false)
+</head>
 <body>
 
+    @* ── Sol Menü ──────────────────────────────────────────────────────────── *@
     @await Component.InvokeAsync("_AdminLayoutSidebarComponentPartial")
 
+    @* ── Üst Menü ──────────────────────────────────────────────────────────── *@
     @await Component.InvokeAsync("_AdminLayoutTopbarComponentPartial")
-
     <main class="main-content" id="main-content">
 
+        @* ── Sayfa İçeriği (@RenderBody) ───────────────────────────────────────── *@
         @RenderBody()
+    
     </main>
-
-    <!-- Toast Container -->
+    @* ── Toast Container — tüm sayfalarda ortak ────────────────────────────── *@
     <div class="toast-container-custom" id="toastContainer"></div>
+
 
     @await Component.InvokeAsync("_AdminLayoutScriptsComponentPartial")
 
+    @* ── Sayfa bazlı <script> blokları buraya inject edilir ────────────────── *@
     @RenderSection("Scripts", false)
 
 </body>
 </html>
-
