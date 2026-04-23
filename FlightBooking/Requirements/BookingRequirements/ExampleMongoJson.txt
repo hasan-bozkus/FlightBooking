@@ -1,0 +1,235 @@
+﻿﻿{
+  "FlightId": "69c394a7ca107d148d4d4e0a",
+  "Passengers": [
+    {
+      "Name": "Ahmet",
+      "Surname": "Yılmaz",
+      "BirthDate": "1995-06-15T00:00:00Z",
+      "Gender": "Erkek",
+      "PassengerType": "Yetişkin",
+      "SeatNumber": "14A",
+      "CheckInStatus": "Not Checked-In",
+      "TicketStatus": "Not Issued",
+      "PaymentStatus": "Paid"
+    }
+  ],
+  "ContactName": "Ahmet Yılmaz",
+  "ContactEmail": "ahmet.yilmaz@gmail.com",
+  "ContactPhone": "+905551112233",
+  "TotalPrice": 246.00,
+  "BookingDate": "2026-04-03T10:30:00Z",
+  "Status": "Confirmed"
+}
+
+-------------------------------------------------
+
+{
+  "FlightId": "69c394a7ca107d148d4d4e0a",
+  "Passengers": [
+    {
+      "Name": "Ahmet",
+      "Surname": "Yılmaz",
+      "BirthDate": "1995-06-15T00:00:00Z",
+      "Gender": "Erkek",
+      "PassengerType": "Yetişkin",
+      "SeatNumber": "14A",
+      "CheckInStatus": "Not Checked-In",
+      "TicketStatus": "Not Issued",
+      "PaymentStatus": "Paid"
+    },
+    {
+      "Name": "Ayşe",
+      "Surname": "Yılmaz",
+      "BirthDate": "1997-09-21T00:00:00Z",
+      "Gender": "Kadın",
+      "PassengerType": "Yetişkin",
+      "SeatNumber": "14B",
+      "CheckInStatus": "Not Checked-In",
+      "TicketStatus": "Not Issued",
+      "PaymentStatus": "Paid"
+    },
+    {
+      "Name": "Mehmet",
+      "Surname": "Yılmaz",
+      "BirthDate": "2018-03-10T00:00:00Z",
+      "Gender": "Erkek",
+      "PassengerType": "Çocuk",
+      "SeatNumber": "14C",
+      "CheckInStatus": "Not Checked-In",
+      "TicketStatus": "Not Issued",
+      "PaymentStatus": "Paid"
+    }
+  ],
+  "ContactName": "Ahmet Yılmaz",
+  "ContactEmail": "ahmet.yilmaz@gmail.com",
+  "ContactPhone": "+905551112233",
+  "TotalPrice": 738.00,
+  "BookingDate": "2026-04-03T10:30:00Z",
+  "Status": "Confirmed"
+}
+
+
+--------------------------------------------------------------
+
+[
+  {
+    "FlightId": "69c394a7ca107d148d4d4e0a",
+    "Passengers": [
+      { "Name": "Ahmet", "Surname": "Yılmaz", "BirthDate": "1990-05-12T00:00:00Z", "Gender": "Erkek", "PassengerType": "Yetişkin", "SeatNumber": "10A", "CheckInStatus": "Not Checked-In", "TicketStatus": "Not Issued", "PaymentStatus": "Paid" }
+    ],
+    "ContactName": "Ahmet Yılmaz",
+    "ContactEmail": "ahmet@gmail.com",
+    "ContactPhone": "+905551112233",
+    "TotalPrice": 250,
+    "BookingDate": "2026-04-03T10:00:00Z",
+    "Status": "Confirmed"
+  },
+  {
+    "FlightId": "69c394a7ca107d148d4d4e0a",
+    "Passengers": [
+      { "Name": "John", "Surname": "Doe", "BirthDate": "1988-03-22T00:00:00Z", "Gender": "Male", "PassengerType": "Adult", "SeatNumber": "10B", "CheckInStatus": "Checked-In", "TicketStatus": "Issued", "PaymentStatus": "Paid" },
+      { "Name": "Jane", "Surname": "Doe", "BirthDate": "1990-07-11T00:00:00Z", "Gender": "Female", "PassengerType": "Adult", "SeatNumber": "10C", "CheckInStatus": "Checked-In", "TicketStatus": "Issued", "PaymentStatus": "Paid" }
+    ],
+    "ContactName": "John Doe",
+    "ContactEmail": "john.doe@mail.com",
+    "ContactPhone": "+12025550123",
+    "TotalPrice": 500,
+    "BookingDate": "2026-04-03T11:00:00Z",
+    "Status": "Confirmed"
+  },
+  {
+    "FlightId": "69c394a7ca107d148d4d4e0a",
+    "Passengers": [
+      { "Name": "Maria", "Surname": "Garcia", "BirthDate": "1992-08-14T00:00:00Z", "Gender": "Female", "PassengerType": "Adult", "SeatNumber": "11A", "CheckInStatus": "Not Checked-In", "TicketStatus": "Not Issued", "PaymentStatus": "Pending" }
+    ],
+    "ContactName": "Maria Garcia",
+    "ContactEmail": "maria@mail.com",
+    "ContactPhone": "+34123456789",
+    "TotalPrice": 240,
+    "BookingDate": "2026-04-03T12:00:00Z",
+    "Status": "Pending"
+  },
+  {
+    "FlightId": "69c394a7ca107d148d4d4e0a",
+    "Passengers": [
+      { "Name": "Mehmet", "Surname": "Demir", "BirthDate": "1985-01-01T00:00:00Z", "Gender": "Erkek", "PassengerType": "Yetişkin", "SeatNumber": "11B", "CheckInStatus": "Not Checked-In", "TicketStatus": "Not Issued", "PaymentStatus": "Paid" },
+      { "Name": "Elif", "Surname": "Demir", "BirthDate": "1987-02-02T00:00:00Z", "Gender": "Kadın", "PassengerType": "Yetişkin", "SeatNumber": "11C", "CheckInStatus": "Not Checked-In", "TicketStatus": "Not Issued", "PaymentStatus": "Paid" }
+    ],
+    "ContactName": "Mehmet Demir",
+    "ContactEmail": "mehmet@gmail.com",
+    "ContactPhone": "+905552223344",
+    "TotalPrice": 500,
+    "BookingDate": "2026-04-03T13:00:00Z",
+    "Status": "Confirmed"
+  },
+  {
+    "FlightId": "69c394a7ca107d148d4d4e0a",
+    "Passengers": [
+      { "Name": "Luca", "Surname": "Rossi", "BirthDate": "1991-04-10T00:00:00Z", "Gender": "Male", "PassengerType": "Adult", "SeatNumber": "12A", "CheckInStatus": "Checked-In", "TicketStatus": "Issued", "PaymentStatus": "Paid" }
+    ],
+    "ContactName": "Luca Rossi",
+    "ContactEmail": "luca@mail.it",
+    "ContactPhone": "+39061234567",
+    "TotalPrice": 260,
+    "BookingDate": "2026-04-03T14:00:00Z",
+    "Status": "Completed"
+  },
+  {
+    "FlightId": "69c394a7ca107d148d4d4e0a",
+    "Passengers": [
+      { "Name": "Sophie", "Surname": "Dubois", "BirthDate": "1993-06-21T00:00:00Z", "Gender": "Female", "PassengerType": "Adult", "SeatNumber": "12B", "CheckInStatus": "Not Checked-In", "TicketStatus": "Not Issued", "PaymentStatus": "Paid" },
+      { "Name": "Pierre", "Surname": "Dubois", "BirthDate": "1990-02-11T00:00:00Z", "Gender": "Male", "PassengerType": "Adult", "SeatNumber": "12C", "CheckInStatus": "Not Checked-In", "TicketStatus": "Not Issued", "PaymentStatus": "Paid" },
+      { "Name": "Lucas", "Surname": "Dubois", "BirthDate": "2015-09-01T00:00:00Z", "Gender": "Male", "PassengerType": "Child", "SeatNumber": "12D", "CheckInStatus": "Not Checked-In", "TicketStatus": "Not Issued", "PaymentStatus": "Paid" }
+    ],
+    "ContactName": "Sophie Dubois",
+    "ContactEmail": "sophie@mail.fr",
+    "ContactPhone": "+33123456789",
+    "TotalPrice": 720,
+    "BookingDate": "2026-04-03T15:00:00Z",
+    "Status": "Confirmed"
+  }
+]
+
+------------------------------------------------
+
+[
+  {
+    "FlightId": "69c394a7ca107d148d4d4e0a",
+    "Passengers": [
+      {
+        "Name": "Ahmet",
+        "Surname": "Yılmaz",
+        "BirthDate": "1990-05-12T00:00:00Z",
+        "Gender": "Erkek",
+        "PassengerType": "Yetişkin",
+        "SeatNumber": "10A",
+        "CheckInStatus": "Not Checked-In",
+        "TicketStatus": "Not Issued",
+        "PaymentStatus": "Paid"
+      }
+    ],
+    "ContactName": "Ahmet Yılmaz",
+    "ContactEmail": "ahmet@gmail.com",
+    "ContactPhone": "+905551112233",
+    "TotalPrice": 250,
+    "BookingDate": "2026-04-03T10:00:00Z",
+    "Status": "Confirmed"
+  },
+  {
+    "FlightId": "69c394a7ca107d148d4d4e0a",
+    "Passengers": [
+      {
+        "Name": "John",
+        "Surname": "Doe",
+        "BirthDate": "1988-03-22T00:00:00Z",
+        "Gender": "Male",
+        "PassengerType": "Adult",
+        "SeatNumber": "10B",
+        "CheckInStatus": "Checked-In",
+        "TicketStatus": "Issued",
+        "PaymentStatus": "Paid"
+      },
+      {
+        "Name": "Jane",
+        "Surname": "Doe",
+        "BirthDate": "1990-07-11T00:00:00Z",
+        "Gender": "Female",
+        "PassengerType": "Adult",
+        "SeatNumber": "10C",
+        "CheckInStatus": "Checked-In",
+        "TicketStatus": "Issued",
+        "PaymentStatus": "Paid"
+      }
+    ],
+    "ContactName": "John Doe",
+    "ContactEmail": "john@mail.com",
+    "ContactPhone": "+12025550123",
+    "TotalPrice": 500,
+    "BookingDate": "2026-04-03T11:00:00Z",
+    "Status": "Confirmed"
+  },
+  {
+    "FlightId": "69c394a7ca107d148d4d4e0a",
+    "Passengers": [
+      {
+        "Name": "Maria",
+        "Surname": "Garcia",
+        "BirthDate": "1992-08-14T00:00:00Z",
+        "Gender": "Female",
+        "PassengerType": "Adult",
+        "SeatNumber": "11A",
+        "CheckInStatus": "Not Checked-In",
+        "TicketStatus": "Not Issued",
+        "PaymentStatus": "Pending"
+      }
+    ],
+    "ContactName": "Maria Garcia",
+    "ContactEmail": "maria@mail.com",
+    "ContactPhone": "+34123456789",
+    "TotalPrice": 240,
+    "BookingDate": "2026-04-03T12:00:00Z",
+    "Status": "Pending"
+  }
+]
+
+---------------------------------
