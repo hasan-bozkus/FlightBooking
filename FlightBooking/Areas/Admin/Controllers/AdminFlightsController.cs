@@ -51,5 +51,10 @@ namespace FlightBooking.Areas.Admin.Controllers
             await _flightService.UpdateFlightAsync(updateFlightDto);
             return RedirectToAction("FlightList", "AdminFlights", new { area = "Admin" });
         }
+
+        public async Task<IActionResult> FlightDetail(string id)
+        {
+            return View();
+        }
     }
 }
