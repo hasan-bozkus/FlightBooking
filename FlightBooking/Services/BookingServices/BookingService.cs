@@ -16,7 +16,7 @@ namespace FlightBooking.Services.BookingServices
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
 
-            _bookingCollection = database.GetCollection<Booking>("Bookings");
+            _bookingCollection = database.GetCollection<Booking>(settings.BookingCollectionName);
             _flightCollection = database.GetCollection<Flight>(settings.FlightCollectionName);
         }
 
@@ -27,15 +27,15 @@ namespace FlightBooking.Services.BookingServices
                 .Find(x => x.FlightId == createBookingDto.FlightId)
                 .FirstOrDefaultAsync();
 
-            if (flight == null)
-                throw new Exception("Uçuş bulunamadı");
+            //if (flight == null)
+            //    throw new Exception("Uçuş bulunamadı");
 
             // 🔥 2. Yolcu sayısı
             var passengerCount = createBookingDto.Passengers.Count;
 
             // 🔥 3. Koltuk kontrol
-            if (flight.AvailableSeats < passengerCount)
-                throw new Exception("Yeterli koltuk yok");
+            //if (flight.AvailableSeats < passengerCount)
+            //    throw new Exception("Yeterli koltuk yok");
 
             // 🔥 4. Passenger mapping
             var passengers = createBookingDto.Passengers.Select(x => new Passenger
@@ -68,13 +68,13 @@ namespace FlightBooking.Services.BookingServices
             await _bookingCollection.InsertOneAsync(booking);
 
             // 🔥 7. Koltuk düş
-            var update = Builders<Flight>.Update
-                .Inc(x => x.AvailableSeats, -passengerCount);
+            //var update = Builders<Flight>.Update
+            //    .Inc(x => x.AvailableSeats, -passengerCount);
 
-            await _flightCollection.UpdateOneAsync(
-                x => x.FlightId == createBookingDto.FlightId,
-                update
-            );
+            //await _flightCollection.UpdateOneAsync(
+            //    x => x.FlightId == createBookingDto.FlightId,
+            //    update
+            //);
         }
     }
 }

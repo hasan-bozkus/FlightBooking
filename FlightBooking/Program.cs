@@ -1,3 +1,4 @@
+using FlightBooking.Services.BookingServices;
 using FlightBooking.Services.FilghtServices;
 using FlightBooking.Settings;
 using Microsoft.Extensions.Options;
@@ -9,6 +10,7 @@ builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("D
 builder.Services.AddAutoMapper(cfg => cfg.AddMaps(typeof(Program).Assembly)); // AutoMapper'ın 14+ sürümü için güncellenen yapılandırma formatı.
 
 builder.Services.AddScoped<IFlightService, FlightService>();
+builder.Services.AddScoped<IBookingService, BookingService>();
 
 builder.Services.AddScoped<IDatabaseSettings>(sp =>
 {

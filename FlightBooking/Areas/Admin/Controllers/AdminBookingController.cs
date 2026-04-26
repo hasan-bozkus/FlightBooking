@@ -1,4 +1,6 @@
-﻿using FlightBooking.Services.FilghtServices;
+﻿using FlightBooking.Dtos.BookingDtos;
+using FlightBooking.Services.BookingServices;
+using FlightBooking.Services.FilghtServices;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FlightBooking.Areas.Admin.Controllers
@@ -7,10 +9,12 @@ namespace FlightBooking.Areas.Admin.Controllers
     public class AdminBookingController : Controller
     {
         private readonly IFlightService _flightService;
+        private readonly IBookingService _bookingService;
 
-        public AdminBookingController(IFlightService flightService)
+        public AdminBookingController(IFlightService flightService, IBookingService bookingService)
         {
             _flightService = flightService;
+            _bookingService = bookingService;
         }
 
         public IActionResult BookingList()
@@ -22,6 +26,7 @@ namespace FlightBooking.Areas.Admin.Controllers
         public async Task<IActionResult> CreateBooking(string id)
         {
             var value = await _flightService.GetFlightByIdDtoAsync(id);
+            ViewBag.FlightId = id;
             ViewBag.FlightNumber = value.FlightNumber;
             ViewBag.DepartureAirportCode = value.DepartureAirportCode;
             ViewBag.DepartureAirportName = value.DepartureAirportName;
@@ -32,6 +37,18 @@ namespace FlightBooking.Areas.Admin.Controllers
             ViewBag.AirlineCode = value.AirlineCode;
 
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateBooking(CreateBookingDto createBookingDto)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View(createBookingDto);
+            }
+
+            await _bookingService.CreateBookingAsync(createBookingDto);
+            return RedirectToAction("BookingList", "AdminBooking", new { area = "Admin" });
         }
     }
 }
