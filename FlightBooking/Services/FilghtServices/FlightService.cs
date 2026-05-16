@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FlightBooking.Dtos.FlightDtos;
+using FlightBooking.Dtos.PassengersDtos;
 using FlightBooking.Entities;
 using FlightBooking.Settings;
 using MongoDB.Driver;
@@ -10,6 +11,7 @@ namespace FlightBooking.Services.FilghtServices
     {
         private readonly IMapper _mapper;
         private readonly IMongoCollection<Flight> _flightsCollection;
+        private readonly IMongoCollection<Booking> _bookingsCollection;
 
         public FlightService(IMapper mapper, IDatabaseSettings _databaseSettings)
         {
@@ -17,6 +19,7 @@ namespace FlightBooking.Services.FilghtServices
             var database = client.GetDatabase(_databaseSettings.DatabaseName);
             _mapper = mapper;
             _flightsCollection = database.GetCollection<Flight>(_databaseSettings.FlightCollectionName);
+            _bookingsCollection = database.GetCollection<Booking>(_databaseSettings.BookingCollectionName);
         }
 
         public async Task CreateFlightAsync(CreateFlightDto createFlightDto)
@@ -38,6 +41,31 @@ namespace FlightBooking.Services.FilghtServices
         public async Task<GetFlightByIdDto> GetFlightByIdDtoAsync(string id)
         {
             return _mapper.Map<GetFlightByIdDto>(await _flightsCollection.Find(x => x.FlightId == id).FirstOrDefaultAsync());
+        }
+
+        public async Task<List<PassengerListItemDto>> GetFlightWithPassengersAsync(string id)
+        {
+            // İlgili uçuşun tüm rezervasyonlarını çek
+            var bookings = await _bookingsCollection.Find(x => x.FlightId == id).ToListAsync();
+
+            // her rezervasyon içinde bulunan yolcuları düzleştir ve dto'ya map'le
+            var passengers = bookings.SelectMany(y => y.Passengers.Select(z => new PassengerListItemDto
+            {
+                Name = z.Name,
+                Surname = z.Surname,
+                Email = y.ContactEmail, //yolcuya ait eposta yoksa iletişim epostasını kullan
+                Gender = z.Gender,
+                PassengerType = z.PassengerType,
+                PnrNumber = y.BookingId, //pnr olarak bookingid kullanılıyor
+                Phone = y.ContactPhone,
+                //lazım olursa eklenir
+                //SeatNumber = z.SeatNumber,
+                //CheckInStatus = z.CheckInNumber,
+                //PaymentStatus = z.PaymentStatus,
+                //TicketStatus = z.TicketStatus,
+            })).ToList();
+
+            return passengers;
         }
 
         public async Task UpdateFlightAsync(UpdateFlightDto updateFlightDto)
