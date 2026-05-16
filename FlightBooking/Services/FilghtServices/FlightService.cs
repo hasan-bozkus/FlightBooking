@@ -38,7 +38,7 @@ namespace FlightBooking.Services.FilghtServices
             return _mapper.Map<List<ResultFlightDto>>(await _flightsCollection.Find(x => true).ToListAsync());
         }
 
-        public async Task<GetFlightByIdDto> GetFlightByIdDtoAsync(string id)
+        public async Task<GetFlightByIdDto> GetFlightByIdAsync(string id)
         {
             return _mapper.Map<GetFlightByIdDto>(await _flightsCollection.Find(x => x.FlightId == id).FirstOrDefaultAsync());
         }
@@ -59,10 +59,10 @@ namespace FlightBooking.Services.FilghtServices
                 PnrNumber = y.BookingId, //pnr olarak bookingid kullanılıyor
                 Phone = y.ContactPhone,
                 //lazım olursa eklenir
-                //SeatNumber = z.SeatNumber,
-                //CheckInStatus = z.CheckInNumber,
-                //PaymentStatus = z.PaymentStatus,
-                //TicketStatus = z.TicketStatus,
+                SeatNumber = z.SeatNumber,
+                CheckInStatus = z.CheckInStatus,
+                PaymentStatus = z.PaymentStatus,
+                TicketStatus = z.TicketStatus,
             })).ToList();
 
             return passengers;

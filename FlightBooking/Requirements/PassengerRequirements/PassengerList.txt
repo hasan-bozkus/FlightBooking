@@ -1,8 +1,17 @@
-﻿@model List<PassengerListItemDto>
-@{
-    ViewData["Title"] = "FlightDetail";
-    Layout = "~/Areas/Admin/Views/AdminLayout/_AdminLayout.cshtml";
+﻿@* ============================================================
+   Areas/Admin/Views/Flights/PassengerList.cshtml
+   Model  : List<FlightBooking.Dtos.PassengerDtos.PassengerListItemDto>
+   ViewBag: FlightNumber, AirlineCode, DepartureAirportCode,
+            ArrivalAirportCode, DepartureTime, ArrivalTime,
+            TotalSeats, OccupiedSeats, AvailableSeats, Status
+   Layout : AdminLayout — SADECE CONTENT
+============================================================ *@
 
+@model List<FlightBooking.Dtos.PassengerDtos.PassengerListItemDto>
+
+@{
+    Layout = "~/Areas/Admin/Views/Layout/AdminLayout.cshtml";
+    ViewData["Title"] = "Uçuş Yolcu Listesi";
 
     @* Stat hesaplamaları *@
     int totalPassengers = Model?.Count ?? 0;
@@ -232,6 +241,7 @@
 </style>
 }
 
+<main class="main-content" id="main-content">
 <div class="container-fluid px-4 py-4">
 <div class="pl-page">
 
@@ -492,6 +502,7 @@
 
 </div>
 </div>
+</main>
 
 @section Scripts {
 <script>
@@ -506,7 +517,7 @@
                 @:  email: "@(p.Email ?? "")", phone: "@(p.Phone ?? "")",
                 @:  gender: "@(p.Gender ?? "")",
                 @:  type: "@(p.PassengerType ?? "")",
-                @:  pnr: "@(p.PnrNumber ?? "")",
+                @:  pnr: "@(p.Pnr ?? "")",
                 @:  seat: "@(p.SeatNumber ?? "—")",
                 @:  checkin: "@(p.CheckInStatus ?? "Not Checked")",
                 @:  payment: "@(p.PaymentStatus ?? "Pending")",

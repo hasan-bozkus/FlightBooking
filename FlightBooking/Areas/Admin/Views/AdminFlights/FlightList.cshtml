@@ -769,15 +769,15 @@
                                               <span class="act-label">Rezerve Et</span>
                                            </a>  
                                         <a asp-area="Admin"
-                                           asp-controller="AdminFlight"
-                                           asp-action="Detail"
+                                           asp-controller="AdminFlights"
+                                           asp-action="FlightDetail"
                                            asp-route-id="@f.FlightId"
                                            class="act act-view">
                                             <i class="bi bi-eye-fill"></i>
                                             <span class="act-label">Görüntüle</span>
                                         </a>
                                         <a asp-area="Admin"
-                                           asp-controller="AdminFlight"
+                                           asp-controller="AdminFlights"
                                            asp-action="UpdateFlight"
                                            asp-route-id="@f.FlightId"
                                            class="act act-edit">
@@ -950,7 +950,7 @@
 
     function confirmDelete(id, no) {
         document.getElementById('deleteFlightNo').textContent = no;
-        document.getElementById('deleteForm').action = '/Admin/AdminFlight/DeleteFlight/' + id;
+        document.getElementById('deleteForm').action = '/Admin/AdminFlights/DeleteFlight/' + id;
         document.getElementById('deleteModal').classList.add('open');
     }
 

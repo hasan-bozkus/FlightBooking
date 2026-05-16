@@ -25,7 +25,7 @@ namespace FlightBooking.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> CreateBooking(string id)
         {
-            var value = await _flightService.GetFlightByIdDtoAsync(id);
+            var value = await _flightService.GetFlightByIdAsync(id);
             ViewBag.FlightId = id;
             ViewBag.FlightNumber = value.FlightNumber;
             ViewBag.DepartureAirportCode = value.DepartureAirportCode;

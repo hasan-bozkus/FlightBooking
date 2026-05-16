@@ -54,7 +54,20 @@ namespace FlightBooking.Areas.Admin.Controllers
 
         public async Task<IActionResult> FlightDetail(string id)
         {
-            return View();
+            var flight = await _flightService.GetFlightByIdAsync(id);
+            var passenger = await _flightService.GetFlightWithPassengersAsync(id);
+
+            ViewBag.FlightNumber = flight?.FlightNumber ?? "--";
+            ViewBag.AirLineCode = flight?.AirlineCode ?? "--";
+            ViewBag.DepartureAirportCode = flight?.DepartureAirportCode ?? "--";
+            ViewBag.ArrivalAirportCode = flight?.ArrivalAirportCode ?? "--";
+            ViewBag.DepartureTime = flight?.DepartureTime;
+            ViewBag.ArrivalTime = flight?.ArrivalTime;
+            ViewBag.TotalSales = flight?.TotalSeats ?? 0;
+            ViewBag.Status = flight?.Status ?? "--";
+
+            ViewBag.Flight = flight;
+            return View(passenger);
         }
     }
 }

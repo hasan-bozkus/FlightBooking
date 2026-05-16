@@ -17,6 +17,8 @@ namespace FlightBooking.Entities
         public string ContactEmail { get; set; }
         public string ContactPhone { get; set; }
 
+        public string PnrNumber { get; set; } // 🔥 EKLE
+
         public List<Passenger> Passengers { get; set; }
     }
 }

@@ -1,0 +1,1161 @@
+﻿
+@* ============================================================
+   Areas/Admin/Views/Bookings/CheckIn.cshtml
+   SADECE CONTENT — Layout hazır
+   ViewBag: FlightNumber, AirlineCode,
+            DepartureAirportCode, DepartureAirportName,
+            ArrivalAirportCode,   ArrivalAirportName,
+            DepartureTime, ArrivalTime,
+            PassengerName, Pnr, Gate,
+            BasePrice, Currency
+============================================================ *@
+
+@{
+    Layout = "~/Areas/Admin/Views/Layout/AdminLayout.cshtml";
+    ViewData["Title"] = "Check-In";
+  
+}
+
+@section Styles {
+    <style>
+
+        .ci-page {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* ── Flight Banner ────────────────────────────────────── */
+        .ci-banner {
+            background: #0B1B3A;
+            border-radius: 14px;
+            padding: 24px 28px;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .ci-banner::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: repeating-linear-gradient( -45deg, rgba(255,255,255,.018) 0, rgba(255,255,255,.018) 1px, transparent 1px, transparent 9px );
+                pointer-events: none;
+            }
+
+        .ci-banner-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .ci-route {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .ci-apt-code {
+            font-family: 'Syne', sans-serif;
+            font-size: 34px;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -.4px;
+            line-height: 1;
+        }
+
+        .ci-apt-name {
+            font-size: 11px;
+            color: rgba(255,255,255,.3);
+            margin-top: 3px;
+            text-align: center;
+        }
+
+        .ci-route-mid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            flex-shrink: 0;
+        }
+
+        .ci-route-line {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+            .ci-route-line::before, .ci-route-line::after {
+                content: '';
+                display: block;
+                height: 1px;
+                width: 32px;
+                background: rgba(255,255,255,.2);
+            }
+
+            .ci-route-line i {
+                font-size: 16px;
+                color: #3B8EF5;
+            }
+
+        .ci-route-dur {
+            font-size: 11px;
+            color: rgba(255,255,255,.3);
+            font-weight: 600;
+            letter-spacing: .4px;
+        }
+
+        .ci-bp-divider {
+            border: none;
+            border-top: 2px dashed rgba(255,255,255,.1);
+            margin: 20px 0;
+        }
+
+        .ci-banner-meta {
+            display: grid;
+            grid-template-columns: repeat(6, auto);
+            gap: 20px 36px;
+            flex-wrap: wrap;
+        }
+
+        .ci-meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .ci-meta-key {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.3);
+        }
+
+        .ci-meta-val {
+            font-size: 14px;
+            font-weight: 600;
+            color: rgba(255,255,255,.85);
+        }
+
+        .ci-status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 14px;
+            border-radius: 99px;
+            font-size: 12px;
+            font-weight: 700;
+            background: rgba(16,185,129,.2);
+            color: #6EE7B7;
+            border: 1px solid rgba(16,185,129,.25);
+        }
+
+            .ci-status-badge .dot {
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background: #10B981;
+                flex-shrink: 0;
+                animation: ci-blink 1.4s ease-in-out infinite;
+            }
+
+        @@keyframes ci-blink {
+            0%, 100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: .2
+            }
+        }
+
+        /* ── Layout ───────────────────────────────────────────── */
+        .ci-layout {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 20px;
+            align-items: start;
+        }
+
+        .ci-col-main {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .ci-col-side {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            position: sticky;
+            top: 80px;
+        }
+
+        /* ── Card ─────────────────────────────────────────────── */
+        .ci-card {
+            background: #fff;
+            border: 1px solid #e8edf5;
+            border-radius: 14px;
+            box-shadow: 0 1px 4px rgba(15,23,42,.06);
+            overflow: hidden;
+        }
+
+        .ci-card-head {
+            padding: 16px 20px;
+            border-bottom: 1px solid #f1f5f9;
+            background: #f8fafc;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .ci-card-ico {
+            width: 36px;
+            height: 36px;
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .ci-card-title {
+            font-family: 'Syne',sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .ci-card-desc {
+            font-size: 12px;
+            color: #94a3b8;
+            margin-top: 1px;
+        }
+
+        .ci-card-body {
+            padding: 22px;
+        }
+
+        /* ── Selected Seat Tag ────────────────────────────────── */
+        .sel-seat-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 5px 13px;
+            border-radius: 99px;
+            border: 1.5px solid #bfdbfe;
+            background: #eff6ff;
+            font-size: 12.5px;
+            font-weight: 600;
+            color: #2563eb;
+            transition: all .15s;
+        }
+
+            .sel-seat-tag.empty {
+                background: #f8fafc;
+                border-color: #e2e8f0;
+                color: #94a3b8;
+            }
+
+        /* ── Seat Map ─────────────────────────────────────────── */
+        .smap-wrap {
+            overflow-x: auto;
+            padding-bottom: 6px;
+        }
+
+        .smap {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            min-width: 310px;
+        }
+
+        .smap-hdr {
+            display: grid;
+            grid-template-columns: 26px repeat(3,32px) 22px repeat(3,32px);
+            gap: 4px;
+            justify-content: center;
+            margin-bottom: 6px;
+        }
+
+        .smap-col-lbl {
+            text-align: center;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .7px;
+            color: #94a3b8;
+            text-transform: uppercase;
+        }
+
+        .smap-row {
+            display: grid;
+            grid-template-columns: 26px repeat(3,32px) 22px repeat(3,32px);
+            gap: 4px;
+            justify-content: center;
+            margin-bottom: 4px;
+        }
+
+        .smap-row-num {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            font-size: 10px;
+            font-weight: 600;
+            color: #94a3b8;
+            padding-right: 3px;
+        }
+
+        .seat {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px 6px 3px 3px;
+            border: 1.5px solid #e2e8f0;
+            background: #fff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 9px;
+            font-weight: 700;
+            color: #94a3b8;
+            transition: all .14s;
+            position: relative;
+            user-select: none;
+        }
+
+            .seat::before {
+                content: '';
+                position: absolute;
+                top: -5px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 18px;
+                height: 5px;
+                background: #f1f5f9;
+                border-radius: 3px 3px 0 0;
+                border: 1.5px solid #e2e8f0;
+                border-bottom: none;
+                transition: background .14s, border-color .14s;
+            }
+
+            .seat:hover:not(.occupied):not(.selected) {
+                border-color: #3b82f6;
+                background: #eff6ff;
+                color: #2563eb;
+                transform: translateY(-1px);
+                box-shadow: 0 4px 10px rgba(59,130,246,.18);
+            }
+
+                .seat:hover:not(.occupied):not(.selected)::before {
+                    background: #eff6ff;
+                    border-color: #3b82f6;
+                }
+
+            .seat.selected {
+                background: #2563eb;
+                border-color: #2563eb;
+                color: #fff;
+                box-shadow: 0 4px 12px rgba(37,99,235,.35);
+                transform: translateY(-1px);
+            }
+
+                .seat.selected::before {
+                    background: #3b82f6;
+                    border-color: #3b82f6;
+                }
+
+            .seat.occupied {
+                background: #f8fafc;
+                border-color: #f1f5f9;
+                color: #e2e8f0;
+                cursor: not-allowed;
+            }
+
+                .seat.occupied::before {
+                    background: #f1f5f9;
+                    border-color: #f1f5f9;
+                }
+
+        .seat-legend {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid #f1f5f9;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: #94a3b8;
+        }
+
+        .legend-dot {
+            width: 13px;
+            height: 13px;
+            border-radius: 3px;
+            border: 1.5px solid #e2e8f0;
+            background: #fff;
+            flex-shrink: 0;
+        }
+
+            .legend-dot.ld-sel {
+                background: #2563eb;
+                border-color: #2563eb;
+            }
+
+            .legend-dot.ld-occ {
+                background: #f8fafc;
+                border-color: #f1f5f9;
+            }
+
+        /* ── Extras ───────────────────────────────────────────── */
+        .extras-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(172px, 1fr));
+            gap: 12px;
+        }
+
+        .extra-card {
+            padding: 14px;
+            border-radius: 10px;
+            border: 1.5px solid #e2e8f0;
+            background: #fff;
+            cursor: pointer;
+            transition: all .15s;
+            position: relative;
+            user-select: none;
+        }
+
+            .extra-card:hover {
+                border-color: #93c5fd;
+                box-shadow: 0 4px 12px rgba(59,130,246,.1);
+            }
+
+            .extra-card.selected {
+                border-color: #2563eb;
+                background: #eff6ff;
+                box-shadow: 0 4px 12px rgba(37,99,235,.12);
+            }
+
+            .extra-card input {
+                position: absolute;
+                opacity: 0;
+                pointer-events: none;
+            }
+
+        .extra-check {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            border: 1.5px solid #e2e8f0;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 9px;
+            color: transparent;
+            transition: all .15s;
+        }
+
+        .extra-card.selected .extra-check {
+            background: #2563eb;
+            border-color: #2563eb;
+            color: #fff;
+        }
+
+        .extra-ico {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            margin-bottom: 9px;
+        }
+
+        .extra-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 2px;
+        }
+
+        .extra-desc {
+            font-size: 11px;
+            color: #94a3b8;
+            margin-bottom: 7px;
+        }
+
+        .extra-price {
+            font-family: 'Syne',sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: #2563eb;
+        }
+
+        /* ── Price Summary ────────────────────────────────────── */
+        .pr-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 11px 0;
+            font-size: 13.5px;
+        }
+
+            .pr-row + .pr-row {
+                border-top: 1px solid #f1f5f9;
+            }
+
+        .pr-lbl {
+            color: #94a3b8;
+        }
+
+        .pr-val {
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        .pr-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 13px 0 0;
+            border-top: 2px solid #f1f5f9;
+            margin-top: 4px;
+        }
+
+        .pr-total-lbl {
+            font-family: 'Syne',sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            color: #0f172a;
+        }
+
+        .pr-total-val {
+            font-family: 'Syne',sans-serif;
+            font-weight: 800;
+            font-size: 22px;
+            color: #2563eb;
+        }
+
+        /* ── Buttons ──────────────────────────────────────────── */
+        .btn-ci {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 9px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all .15s;
+        }
+
+        .btn-ci-primary {
+            background: #2563eb;
+            color: #fff;
+        }
+
+            .btn-ci-primary:hover {
+                background: #1d4ed8;
+                box-shadow: 0 6px 20px rgba(37,99,235,.35);
+                transform: translateY(-1px);
+            }
+
+            .btn-ci-primary:active {
+                transform: translateY(0);
+            }
+
+        .btn-ci-secondary {
+            background: #fff;
+            color: #64748b;
+            border: 1.5px solid #e2e8f0;
+        }
+
+            .btn-ci-secondary:hover {
+                border-color: #94a3b8;
+                color: #0f172a;
+            }
+
+        /* ── Info Note ────────────────────────────────────────── */
+        .ci-info-note {
+            background: #eff6ff;
+            border: 1px solid rgba(37,99,235,.15);
+            border-radius: 8px;
+            padding: 10px 13px;
+            font-size: 12px;
+            color: #2563eb;
+            display: flex;
+            gap: 7px;
+            align-items: flex-start;
+        }
+
+        /* ── Modal ────────────────────────────────────────────── */
+        .ci-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(11,27,58,.5);
+            backdrop-filter: blur(5px);
+            z-index: 9000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+            .ci-modal-overlay.open {
+                display: flex;
+                animation: ci-fade .2s ease;
+            }
+
+        @@keyframes ci-fade {
+            from {
+                opacity: 0
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+        .ci-modal-box {
+            background: #fff;
+            border-radius: 16px;
+            width: min(420px, calc(100vw - 40px));
+            box-shadow: 0 8px 36px rgba(11,27,58,.18);
+            padding: 30px 26px;
+            text-align: center;
+            animation: ci-scale .2s ease;
+        }
+
+        @@keyframes ci-scale {
+            from {
+                transform: scale(.94);
+                opacity: 0
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1
+            }
+        }
+
+        .ci-modal-ico {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: #f0fdf4;
+            color: #16a34a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 14px;
+            font-size: 28px;
+        }
+
+        .ci-modal-title {
+            font-family: 'Syne',sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 6px;
+        }
+
+        .ci-modal-desc {
+            font-size: 13px;
+            color: #94a3b8;
+            line-height: 1.7;
+        }
+
+        .ci-modal-bp {
+            background: #0B1B3A;
+            border-radius: 12px;
+            padding: 15px 17px;
+            margin: 16px 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            text-align: left;
+        }
+
+        .ci-mbp-key {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .8px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.3);
+        }
+
+        .ci-mbp-val {
+            font-size: 13px;
+            font-weight: 600;
+            color: rgba(255,255,255,.82);
+            margin-top: 2px;
+        }
+
+        /* ── Responsive ───────────────────────────────────────── */
+        @@media (max-width:1000px) {
+            .ci-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .ci-col-side {
+                position: static;
+            }
+
+            .ci-banner-meta {
+                grid-template-columns: repeat(3,auto);
+            }
+        }
+
+        @@media (max-width:640px) {
+            .ci-banner {
+                padding: 18px;
+            }
+
+            .ci-apt-code {
+                font-size: 26px;
+            }
+
+            .ci-banner-meta {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .extras-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @@media (max-width:400px) {
+            .extras-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+    </style>
+}
+
+<main class="main-content" id="main-content">
+    <div class="container-fluid px-4 py-4">
+        <div class="ci-page">
+
+            @* ── Başlık ── *@
+            <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+                <div>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-1" style="font-size:12.5px;">
+                            <li class="breadcrumb-item">
+                                <a href="#" class="text-decoration-none text-muted">Dashboard</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a asp-area="Admin" asp-controller="Bookings" asp-action="BookingList"
+                                   class="text-decoration-none text-muted">Rezervasyonlar</a>
+                            </li>
+                            <li class="breadcrumb-item active">Check-In</li>
+                        </ol>
+                    </nav>
+                    <h4 class="fw-bold mb-1" style="color:#0f172a;">Check-In İşlemi</h4>
+                    <p class="text-muted mb-0" style="font-size:13px;">
+                        Yolcu check-in adımlarını tamamlayın ve koltuk seçimi yapın.
+                    </p>
+                </div>
+                <a asp-area="Admin" asp-controller="Bookings" asp-action="BookingList"
+                   class="btn btn-outline-secondary btn-sm px-3"
+                   style="border-radius:8px;font-size:13px;">
+                    <i class="bi bi-arrow-left me-1"></i> Geri
+                </a>
+            </div>
+
+            @* ── Flight Banner ── *@
+            <div class="ci-banner">
+                <div class="ci-banner-top">
+                    <div class="ci-route">
+                        <div style="text-align:center;">
+                            <div class="ci-apt-code">@ViewBag.DepartureAirportCode</div>
+                            <div class="ci-apt-name">@ViewBag.DepartureAirportName</div>
+                        </div>
+                        <div class="ci-route-mid">
+                            <div class="ci-route-line"><i class="bi bi-airplane-fill"></i></div>
+                            <div class="ci-route-dur" id="bannerDur">— dk</div>
+                        </div>
+                        <div style="text-align:center;">
+                            <div class="ci-apt-code">@ViewBag.ArrivalAirportCode</div>
+                            <div class="ci-apt-name">@ViewBag.ArrivalAirportName</div>
+                        </div>
+                    </div>
+                    <span class="ci-status-badge">
+                        <span class="dot"></span> Planlandı
+                    </span>
+                </div>
+
+                <hr class="ci-bp-divider" />
+
+                <div class="ci-banner-meta">
+                    <div class="ci-meta-item">
+                        <span class="ci-meta-key">Uçuş Kodu</span>
+                        <span class="ci-meta-val">@ViewBag.FlightNumber</span>
+                    </div>
+                    <div class="ci-meta-item">
+                        <span class="ci-meta-key">Tarih</span>
+                        <span class="ci-meta-val">
+                            @if (ViewBag.DepartureTime != null)
+                            {
+                                @(((DateTime)ViewBag.DepartureTime).ToString("dd MMM yyyy", new System.Globalization.CultureInfo("tr-TR")))
+                            }
+                            else
+                            {
+
+                                <text>—</text>
+                            }
+                        </span>
+                    </div>
+                    <div class="ci-meta-item">
+                        <span class="ci-meta-key">Saat</span>
+                        <span class="ci-meta-val">
+                            @(ViewBag.DepartureTime != null ? ((DateTime)ViewBag.DepartureTime).ToString("HH:mm") : "—")
+                            →
+                            @(ViewBag.ArrivalTime != null ? ((DateTime)ViewBag.ArrivalTime).ToString("HH:mm") : "—")
+                        </span>
+                    </div>
+                    <div class="ci-meta-item">
+                        <span class="ci-meta-key">Yolcu</span>
+                        <span class="ci-meta-val">@ViewBag.PassengerName</span>
+                    </div>
+                    <div class="ci-meta-item">
+                        <span class="ci-meta-key">PNR</span>
+                        <span class="ci-meta-val" style="font-family:monospace;letter-spacing:.8px;">@ViewBag.Pnr</span>
+                    </div>
+                    <div class="ci-meta-item">
+                        <span class="ci-meta-key">Kapı</span>
+                        <span class="ci-meta-val">@(ViewBag.Gate ?? "—")</span>
+                    </div>
+                </div>
+            </div>
+
+            @* ── Layout ── *@
+            <div class="ci-layout">
+
+                @* Sol: Koltuk + Ek Hizmetler *@
+                <div class="ci-col-main">
+
+                    <div class="ci-card">
+                        <div class="ci-card-head">
+                            <div class="ci-card-ico" style="background:#eff6ff;color:#2563eb;">
+                                <i class="bi bi-grid-3x3-gap-fill"></i>
+                            </div>
+                            <div>
+                                <div class="ci-card-title">Koltuk Seçimi</div>
+                                <div class="ci-card-desc">Müsait koltuklar arasından seçim yapın</div>
+                            </div>
+                            <div class="ms-auto">
+                                <span class="sel-seat-tag empty" id="selectedTag">
+                                    <i class="bi bi-geo-alt"></i>
+                                    <span id="selectedLabel">Koltuk seçilmedi</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="ci-card-body">
+                            <div class="smap-wrap">
+                                <div class="smap" id="seatMap"></div>
+                            </div>
+                            <div class="seat-legend">
+                                <div class="legend-item"><div class="legend-dot"></div><span>Müsait</span></div>
+                                <div class="legend-item"><div class="legend-dot ld-sel"></div><span>Seçili</span></div>
+                                <div class="legend-item"><div class="legend-dot ld-occ"></div><span>Dolu</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ci-card">
+                        <div class="ci-card-head">
+                            <div class="ci-card-ico" style="background:#fffbeb;color:#d97706;">
+                                <i class="bi bi-bag-fill"></i>
+                            </div>
+                            <div>
+                                <div class="ci-card-title">Ek Hizmetler</div>
+                                <div class="ci-card-desc">İstediğiniz ekstra hizmetleri seçin (çoklu seçim)</div>
+                            </div>
+                        </div>
+                        <div class="ci-card-body">
+                            <div class="extras-grid" id="extrasGrid"></div>
+                        </div>
+                    </div>
+
+                </div>
+
+                @* Sağ: Fiyat + Butonlar *@
+                <div class="ci-col-side">
+
+                    <div class="ci-card">
+                        <div class="ci-card-head">
+                            <div class="ci-card-ico" style="background:#f5f3ff;color:#7c3aed;">
+                                <i class="bi bi-receipt-cutoff"></i>
+                            </div>
+                            <div>
+                                <div class="ci-card-title">Fiyat Özeti</div>
+                                <div class="ci-card-desc">Seçimlerinize göre güncellenir</div>
+                            </div>
+                        </div>
+                        <div class="ci-card-body">
+                            <div class="pr-row">
+                                <span class="pr-lbl">Bilet Fiyatı</span>
+                                <span class="pr-val">@ViewBag.BasePrice @ViewBag.Currency</span>
+                            </div>
+                            <div id="extrasBreakdown"></div>
+                            <div class="pr-total">
+                                <span class="pr-total-lbl">Toplam</span>
+                                <span class="pr-total-val" id="totalPrice">@ViewBag.BasePrice @ViewBag.Currency</span>
+                            </div>
+                            <div class="ci-info-note mt-3">
+                                <i class="bi bi-info-circle-fill" style="flex-shrink:0;margin-top:1px;"></i>
+                                <span>Ek hizmet ücretleri koltuk seçiminden sonra tahsil edilir.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-column gap-2">
+                        <button class="btn-ci btn-ci-primary" id="btnCheckin" onclick="completeCheckin()">
+                            <i class="bi bi-check-circle-fill"></i> Check-In Tamamla
+                        </button>
+                        <button class="btn-ci btn-ci-secondary" onclick="cancelCheckin()">
+                            <i class="bi bi-x-circle"></i> İptal
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
+
+@* ── Başarı Modalı ── *@
+<div class="ci-modal-overlay" id="ciModal">
+    <div class="ci-modal-box">
+        <div class="ci-modal-ico"><i class="bi bi-check-lg"></i></div>
+        <div class="ci-modal-title">Check-In Tamamlandı!</div>
+        <div class="ci-modal-desc">Başarıyla check-in yapıldı. Biniş kartı bilgileri aşağıda özetlenmiştir.</div>
+        <div class="ci-modal-bp">
+            <div>
+                <div class="ci-mbp-key">Yolcu</div>
+                <div class="ci-mbp-val">@ViewBag.PassengerName</div>
+            </div>
+            <div>
+                <div class="ci-mbp-key">Uçuş</div>
+                <div class="ci-mbp-val">@ViewBag.FlightNumber</div>
+            </div>
+            <div>
+                <div class="ci-mbp-key">Koltuk</div>
+                <div class="ci-mbp-val" id="modalSeat">—</div>
+            </div>
+            <div>
+                <div class="ci-mbp-key">Kapı</div>
+                <div class="ci-mbp-val">@(ViewBag.Gate ?? "—")</div>
+            </div>
+            <div>
+                <div class="ci-mbp-key">PNR</div>
+                <div class="ci-mbp-val" style="font-family:monospace;letter-spacing:.8px;">@ViewBag.Pnr</div>
+            </div>
+            <div>
+                <div class="ci-mbp-key">Toplam</div>
+                <div class="ci-mbp-val" id="modalTotal">—</div>
+            </div>
+        </div>
+        <button class="btn-ci btn-ci-primary" onclick="closeModal()">
+            <i class="bi bi-download me-1"></i> Biniş Kartını İndir
+        </button>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+
+        var BASE_PRICE = parseFloat('@(ViewBag.BasePrice ?? 0)') || 0;
+        var CURRENCY   = '@(ViewBag.Currency ?? "₺")';
+        var ROWS       = 20;
+        var COLS       = ['A','B','C','D','E','F'];
+
+        var OCCUPIED   = [
+            '1A','1B','2C','3D','4A','4F','5B','5E',
+            '6C','7A','7D','8B','8F','9C','10A','10E',
+            '11B','12D','13A','13C','14F','15B','15E',
+            '16A','17C','18D','19B','20F','3B','6E'
+        ];
+
+        var selectedSeat   = null;
+        var selectedExtras = [];
+
+        var extras = [
+            { id:'baggage',   name:'Ekstra Bagaj',     desc:'20 kg ek bagaj hakkı',  price:150, icon:'bi-luggage-fill',          bg:'#eff6ff', fg:'#2563eb' },
+            { id:'sandwich',  name:'Sandviç Menü',      desc:'İçecekli atıştırmalık', price:80,  icon:'bi-cup-hot-fill',          bg:'#fff7ed', fg:'#ea580c' },
+            { id:'priority',  name:'Öncelikli Biniş',   desc:'İlk binen yolcu',       price:120, icon:'bi-lightning-charge-fill', bg:'#fefce8', fg:'#ca8a04' },
+            { id:'comfort',   name:'Konfor Paketi',     desc:'Battaniye + yastık',    price:90,  icon:'bi-stars',                 bg:'#f5f3ff', fg:'#7c3aed' },
+            { id:'insurance', name:'Seyahat Sigortası', desc:'Tam kapsamlı sigorta',  price:200, icon:'bi-shield-check-fill',     bg:'#f0fdf4', fg:'#16a34a' },
+            { id:'lounge',    name:'Lounge Erişimi',    desc:'VIP bekleme salonu',    price:350, icon:'bi-gem',                   bg:'#fff1f2', fg:'#e11d48' },
+        ];
+
+        /* ── Seat Map ──────────────────────────────────────────── */
+        function buildSeatMap() {
+            var map  = document.getElementById('seatMap');
+            var html = '';
+
+            html += '<div class="smap-hdr"><div></div>';
+            ['A','B','C'].forEach(function(c){ html += '<div class="smap-col-lbl">' + c + '</div>'; });
+            html += '<div></div>';
+            ['D','E','F'].forEach(function(c){ html += '<div class="smap-col-lbl">' + c + '</div>'; });
+            html += '</div>';
+
+            for (var r = 1; r <= ROWS; r++) {
+                html += '<div class="smap-row"><div class="smap-row-num">' + r + '</div>';
+
+                for (var i = 0; i < 3; i++) {
+                    var sid = r + COLS[i];
+                    var occ = OCCUPIED.indexOf(sid) !== -1;
+                    html += '<button class="seat' + (occ ? ' occupied' : '') + '" id="s-' + sid + '"' +
+                        (occ ? ' disabled' : ' onclick="pickSeat(\'' + sid + '\')"') +
+                        '>' + sid + '</button>';
+                }
+
+                html += '<div></div>';
+
+                for (var j = 3; j < 6; j++) {
+                    var sid2 = r + COLS[j];
+                    var occ2 = OCCUPIED.indexOf(sid2) !== -1;
+                    html += '<button class="seat' + (occ2 ? ' occupied' : '') + '" id="s-' + sid2 + '"' +
+                        (occ2 ? ' disabled' : ' onclick="pickSeat(\'' + sid2 + '\')"') +
+                        '>' + sid2 + '</button>';
+                }
+
+                html += '</div>';
+            }
+
+            map.innerHTML = html;
+        }
+
+        function pickSeat(id) {
+            if (selectedSeat) {
+                var prev = document.getElementById('s-' + selectedSeat);
+                if (prev) prev.classList.remove('selected');
+            }
+
+            selectedSeat = (selectedSeat === id) ? null : id;
+
+            var tag   = document.getElementById('selectedTag');
+            var label = document.getElementById('selectedLabel');
+
+            if (selectedSeat) {
+                document.getElementById('s-' + selectedSeat).classList.add('selected');
+                tag.classList.remove('empty');
+                label.textContent = 'Seçilen Koltuk: ' + selectedSeat;
+            } else {
+                tag.classList.add('empty');
+                label.textContent = 'Koltuk seçilmedi';
+            }
+        }
+
+        /* ── Extras ────────────────────────────────────────────── */
+        function buildExtras() {
+            document.getElementById('extrasGrid').innerHTML = extras.map(function(e) {
+                return '<label class="extra-card" id="ex-' + e.id + '" onclick="toggleExtra(\'' + e.id + '\')">' +
+                    '<input type="checkbox" />' +
+                    '<div class="extra-check"><i class="bi bi-check-lg"></i></div>' +
+                    '<div class="extra-ico" style="background:' + e.bg + ';color:' + e.fg + ';"><i class="bi ' + e.icon + '"></i></div>' +
+                    '<div class="extra-name">' + e.name + '</div>' +
+                    '<div class="extra-desc">' + e.desc + '</div>' +
+                    '<div class="extra-price">+ ' + e.price + ' ' + CURRENCY + '</div>' +
+                '</label>';
+            }).join('');
+        }
+
+        function toggleExtra(id) {
+            var idx  = selectedExtras.indexOf(id);
+            var card = document.getElementById('ex-' + id);
+
+            if (idx === -1) { selectedExtras.push(id); card.classList.add('selected'); }
+            else            { selectedExtras.splice(idx, 1); card.classList.remove('selected'); }
+
+            updatePrice();
+        }
+
+        function updatePrice() {
+            var total     = BASE_PRICE;
+            var breakdown = '';
+
+            selectedExtras.forEach(function(id) {
+                var ex = extras.find(function(e){ return e.id === id; });
+                if (!ex) return;
+                total += ex.price;
+                breakdown +=
+                    '<div class="pr-row">' +
+                        '<span class="pr-lbl">' + ex.name + '</span>' +
+                        '<span class="pr-val">+ ' + ex.price + ' ' + CURRENCY + '</span>' +
+                    '</div>';
+            });
+
+            document.getElementById('extrasBreakdown').innerHTML = breakdown;
+            document.getElementById('totalPrice').textContent = total + ' ' + CURRENCY;
+        }
+
+        /* ── Check-In ──────────────────────────────────────────── */
+        function completeCheckin() {
+            if (!selectedSeat) {
+                var tag = document.getElementById('selectedTag');
+                tag.style.cssText += 'border-color:#fecaca!important;background:#fef2f2!important;color:#dc2626!important;';
+                document.getElementById('selectedLabel').textContent = '⚠ Lütfen koltuk seçin';
+                setTimeout(function() {
+                    tag.style.cssText = '';
+                    tag.classList.add('empty');
+                    if (!selectedSeat) document.getElementById('selectedLabel').textContent = 'Koltuk seçilmedi';
+                }, 2500);
+                document.getElementById('seatMap').scrollIntoView({ behavior:'smooth', block:'start' });
+                return;
+            }
+
+            var total = BASE_PRICE;
+            selectedExtras.forEach(function(id) {
+                var ex = extras.find(function(e){ return e.id === id; });
+                if (ex) total += ex.price;
+            });
+
+            document.getElementById('modalSeat').textContent  = selectedSeat;
+            document.getElementById('modalTotal').textContent = total + ' ' + CURRENCY;
+            document.getElementById('ciModal').classList.add('open');
+        }
+
+        function cancelCheckin() {
+            if (confirm('Check-in işlemini iptal etmek istiyor musunuz?')) {
+                window.history.back();
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('ciModal').classList.remove('open');
+        }
+
+        document.getElementById('ciModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            buildSeatMap();
+            buildExtras();
+            updatePrice();
+        });
+
+    </script>
+}

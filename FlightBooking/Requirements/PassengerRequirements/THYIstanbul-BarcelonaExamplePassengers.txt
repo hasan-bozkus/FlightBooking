@@ -1,0 +1,193 @@
+﻿{
+  "FlightId": "69c394a7ca107d148d4d4e10",
+  "PnrNumber": "X9K2LM",
+  "Passengers": [
+    {
+      "PassengerId": "p1001",
+      "Name": "Ahmet",
+      "Surname": "Yılmaz",
+      "BirthDate": "1990-05-10T00:00:00Z",
+      "Gender": "Erkek",
+      "PassengerType": "Yetişkin",
+      "SeatNumber": null,
+      "IsCheckedIn": false,
+      "CheckInDate": null,
+      "TicketStatus": "Active",
+      "PaymentStatus": "Paid",
+      "BaggageKg": 15,
+      "MealType": null,
+      "ExtraServices": [],
+      "BoardingPassNumber": null,
+      "Gate": null,
+      "BoardingTime": null
+    },
+    {
+      "PassengerId": "p1002",
+      "Name": "Ayşe",
+      "Surname": "Demir",
+      "BirthDate": "1992-08-22T00:00:00Z",
+      "Gender": "Kadın",
+      "PassengerType": "Yetişkin",
+      "SeatNumber": "12B",
+      "IsCheckedIn": true,
+      "CheckInDate": "2026-04-20T08:30:00Z",
+      "TicketStatus": "Active",
+      "PaymentStatus": "Paid",
+      "BaggageKg": 20,
+      "MealType": "Vegetarian",
+      "ExtraServices": ["Priority Boarding"],
+      "BoardingPassNumber": "BP789456",
+      "Gate": "A3",
+      "BoardingTime": "2026-04-20T10:00:00Z"
+    }
+  ],
+  "ContactName": "Ahmet Yılmaz",
+  "ContactEmail": "ahmetyilmaz@gmail.com",
+  "ContactPhone": "5321112233",
+  "TotalPrice": 550.0,
+  "BookingDate": "2026-04-20T07:00:00Z",
+  "Status": "Confirmed"
+}
+
+-------------------------------------------------------------------------
+
+{
+  "FlightId": "69c394a7ca107d148d4d4e10",
+  "PnrNumber": "A1B2C3",
+  "Passengers": [
+    {
+      "PassengerId": "p2001",
+      "Name": "Emre",
+      "Surname": "Kurt",
+      "BirthDate": "1995-03-15T00:00:00Z",
+      "Gender": "Erkek",
+      "PassengerType": "Yetişkin",
+      "SeatNumber": null,
+      "IsCheckedIn": false,
+      "CheckInDate": null,
+      "TicketStatus": "Active",
+      "PaymentStatus": "Paid",
+      "BaggageKg": 20,
+      "MealType": null,
+      "ExtraServices": [],
+      "BoardingPassNumber": null,
+      "Gate": null,
+      "BoardingTime": null
+    }
+  ],
+  "ContactName": "Emre Kurt",
+  "ContactEmail": "emrekurt@gmail.com",
+  "ContactPhone": "5334445566",
+  "TotalPrice": 320.0,
+  "BookingDate": "2026-04-20T09:00:00Z",
+  "Status": "Confirmed"
+}
+
+--------------------------------------------------------------------------
+
+
+{
+  "FlightId": "69c394a7ca107d148d4d4e10",
+  "PnrNumber": "SPN789",
+  "Passengers": [
+    {
+      "PassengerId": "p3001",
+      "Name": "Carlos",
+      "Surname": "Garcia",
+      "BirthDate": "1985-07-20T00:00:00Z",
+      "Gender": "Erkek",
+      "PassengerType": "Yetişkin",
+      "SeatNumber": null,
+      "IsCheckedIn": false,
+      "CheckInDate": null,
+      "TicketStatus": "Active",
+      "PaymentStatus": "Paid",
+      "BaggageKg": 25,
+      "MealType": null,
+      "ExtraServices": [],
+      "BoardingPassNumber": null,
+      "Gate": null,
+      "BoardingTime": null
+    },
+    {
+      "PassengerId": "p3002",
+      "Name": "Maria",
+      "Surname": "Garcia",
+      "BirthDate": "1987-11-05T00:00:00Z",
+      "Gender": "Kadın",
+      "PassengerType": "Yetişkin",
+      "SeatNumber": null,
+      "IsCheckedIn": false,
+      "CheckInDate": null,
+      "TicketStatus": "Active",
+      "PaymentStatus": "Paid",
+      "BaggageKg": 20,
+      "MealType": null,
+      "ExtraServices": [],
+      "BoardingPassNumber": null,
+      "Gate": null,
+      "BoardingTime": null
+    },
+    {
+      "PassengerId": "p3003",
+      "Name": "Luis",
+      "Surname": "Garcia",
+      "BirthDate": "2015-04-12T00:00:00Z",
+      "Gender": "Erkek",
+      "PassengerType": "Çocuk",
+      "SeatNumber": null,
+      "IsCheckedIn": false,
+      "CheckInDate": null,
+      "TicketStatus": "Active",
+      "PaymentStatus": "Paid",
+      "BaggageKg": 10,
+      "MealType": null,
+      "ExtraServices": [],
+      "BoardingPassNumber": null,
+      "Gate": null,
+      "BoardingTime": null
+    }
+  ],
+  "ContactName": "Carlos Garcia",
+  "ContactEmail": "carlos.garcia@gmail.com",
+  "ContactPhone": "600123456",
+  "TotalPrice": 900.0,
+  "BookingDate": "2026-04-20T09:30:00Z",
+  "Status": "Confirmed"
+}
+
+--------------------------------------------------------------------------
+
+{
+  "FlightId": "69c394a7ca107d148d4d4e10",
+  "PnrNumber": "TRK456",
+  "Passengers": [
+    {
+      "PassengerId": "p4001",
+      "Name": "Zeynep",
+      "Surname": "Aydın",
+      "BirthDate": "1998-02-14T00:00:00Z",
+      "Gender": "Kadın",
+      "PassengerType": "Yetişkin",
+      "SeatNumber": null,
+      "IsCheckedIn": false,
+      "CheckInDate": null,
+      "TicketStatus": "Active",
+      "PaymentStatus": "Paid",
+      "BaggageKg": 15,
+      "MealType": null,
+      "ExtraServices": [],
+      "BoardingPassNumber": null,
+      "Gate": null,
+      "BoardingTime": null
+    }
+  ],
+  "ContactName": "Zeynep Aydın",
+  "ContactEmail": "zeynepaydin@gmail.com",
+  "ContactPhone": "5351234567",
+  "TotalPrice": 280.0,
+  "BookingDate": "2026-04-20T10:15:00Z",
+  "Status": "Confirmed"
+}
+
+--------------------------------------------------------------------------
