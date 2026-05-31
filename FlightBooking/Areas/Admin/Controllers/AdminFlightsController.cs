@@ -63,8 +63,9 @@ namespace FlightBooking.Areas.Admin.Controllers
             ViewBag.ArrivalAirportCode = flight?.ArrivalAirportCode ?? "--";
             ViewBag.DepartureTime = flight?.DepartureTime;
             ViewBag.ArrivalTime = flight?.ArrivalTime;
-            ViewBag.TotalSales = flight?.TotalSeats ?? 0;
+            ViewBag.TotalSeats = flight?.TotalSeats ?? 0;
             ViewBag.Status = flight?.Status ?? "--";
+            //ViewBag.PassgengerId = flight?.PassgengerId ?? "--";
 
             ViewBag.Flight = flight;
             return View(passenger);

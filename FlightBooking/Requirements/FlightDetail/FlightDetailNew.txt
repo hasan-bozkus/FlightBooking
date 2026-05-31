@@ -1,7 +1,18 @@
-﻿@model List<PassengerListItemDto>
+﻿@* ============================================================
+   Areas/Admin/Views/Flights/PassengerList.cshtml
+   Model  : List<FlightBooking.Dtos.PassengerDtos.PassengerListItemDto>
+   ViewBag: FlightNumber, AirlineCode, DepartureAirportCode,
+            ArrivalAirportCode, DepartureTime, ArrivalTime,
+            TotalSeats, OccupiedSeats, AvailableSeats, Status
+   Layout : AdminLayout — SADECE CONTENT
+============================================================ *@
+
+@model List<FlightBooking.Dtos.PassengerDtos.PassengerListItemDto>
+
 @{
-    ViewData["Title"] = "FlightDetail";
-    Layout = "~/Areas/Admin/Views/AdminLayout/_AdminLayout.cshtml";
+    Layout = "~/Areas/Admin/Views/Layout/AdminLayout.cshtml";
+    ViewData["Title"] = "Uçuş Yolcu Listesi";
+
     @* Stat hesaplamaları *@
     int totalPassengers = Model?.Count ?? 0;
 
@@ -549,6 +560,7 @@
     </style>
 }
 
+<main class="main-content" id="main-content">
     <div class="container-fluid px-4 py-4">
         <div class="pl-page">
 
@@ -810,6 +822,7 @@
 
         </div>
     </div>
+</main>
 
 @section Scripts {
     <script>

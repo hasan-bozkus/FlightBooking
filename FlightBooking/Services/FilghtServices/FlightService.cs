@@ -56,13 +56,14 @@ namespace FlightBooking.Services.FilghtServices
                 Email = y.ContactEmail, //yolcuya ait eposta yoksa iletişim epostasını kullan
                 Gender = z.Gender,
                 PassengerType = z.PassengerType,
-                PnrNumber = y.BookingId, //pnr olarak bookingid kullanılıyor
+                PnrNumber = y.PnrNumber, //pnr olarak bookingid kullanılıyor
                 Phone = y.ContactPhone,
                 //lazım olursa eklenir
                 SeatNumber = z.SeatNumber,
                 CheckInStatus = z.CheckInStatus,
                 PaymentStatus = z.PaymentStatus,
                 TicketStatus = z.TicketStatus,
+                PassengerId = z.PassengerId
             })).ToList();
 
             return passengers;
