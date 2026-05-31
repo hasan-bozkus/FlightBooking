@@ -882,14 +882,15 @@
 
         /* ── FIX 1: Cinsiyet ikonu — Bootstrap Icons'da gender-female yok,
                gender-venus kullanılır; renk inline style ile verilir ─────── */
-        function genderIcon(g) {
-            if (g === 'Erkek') {
-                return '<i class="bi bi-gender-male me-1" style="color:#2563eb;"></i>';
+                function genderIcon(g) {
+            var lower = (g || '').toLowerCase();
+            if (lower === 'erkek') {
+                return '<span style="color:#2563eb;font-size:15px;margin-right:4px;">♂</span>';
             }
-            if (g === 'Kadın') {
-                return '<i class="bi bi-gender-female me-1" style="color:#db2777;"></i>';
+            if (lower.indexOf('kad') === 0) {
+                return '<span style="color:#db2777;font-size:15px;margin-right:4px;">♀</span>';
             }
-            return '<i class="bi bi-dash me-1"></i>';
+            return '<span style="margin-right:4px;">—</span>';
         }
 
         /* ── Filter ──────────────────────────────────────────── */
@@ -1023,6 +1024,7 @@
         function doCheckin(passengerId) {
             // TODO: buraya check-in endpoint çağrısı eklenecek
             console.log('Check-in Yap — PassengerId:', passengerId);
+            window.location.href = '/Admin/AdminCheckIn/Index/' + passengerId;
         }
 
         /* ── Pagination ──────────────────────────────────────── */

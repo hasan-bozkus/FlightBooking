@@ -1,0 +1,15 @@
+﻿﻿// YENİ (doğru)
+if (g === 'Kadın' || g === 'Kad\u0131n') {
+    return '<i class="bi bi-gender-venus me-1" style="color:#db2777;"></i>';
+}
+----------------------------------------------------------------------------
+function genderIcon(g) {
+    var lower = (g || '').toLowerCase();
+    if (lower === 'erkek') {
+        return '<span style="color:#2563eb;font-size:15px;margin-right:4px;">♂</span>';
+    }
+    if (lower.indexOf('kad') === 0) {
+        return '<span style="color:#db2777;font-size:15px;margin-right:4px;">♀</span>';
+    }
+    return '<span style="margin-right:4px;">—</span>';
+}

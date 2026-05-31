@@ -65,9 +65,15 @@ namespace FlightBooking.Areas.Admin.Controllers
             ViewBag.ArrivalTime = flight?.ArrivalTime;
             ViewBag.TotalSeats = flight?.TotalSeats ?? 0;
             ViewBag.Status = flight?.Status ?? "--";
-            //ViewBag.PassgengerId = flight?.PassgengerId ?? "--";
 
             ViewBag.Flight = flight;
+
+            TempData["FlightNumber"] = flight?.FlightNumber;
+            TempData["DepartureTime"] = flight?.DepartureTime;
+            TempData["ArrivalTime"] = flight?.ArrivalTime;
+            //TempData["PassengerName"] = passenger?.Select(x => x.Name).FirstOrDefault();
+            //TempData["PnrNumber"] = passenger?.Select(x => x).FirstOrDefault();
+
             return View(passenger);
         }
     }

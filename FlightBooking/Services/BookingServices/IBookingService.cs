@@ -9,5 +9,7 @@ namespace FlightBooking.Services.BookingServices
         Task CreateBookingAsync(CreateBookingDto createBookingDto);
         //Task DeleteBookingAsync(string id);
         //Task UpdateBookingAsync(UpdateBookingDto updateBookingDto);
+
+        Task<(string Name, string Surname)> GetPassengerNameAsync(string passengerId);
     }
 }

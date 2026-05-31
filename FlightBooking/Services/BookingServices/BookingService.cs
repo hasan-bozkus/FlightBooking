@@ -82,6 +82,24 @@ namespace FlightBooking.Services.BookingServices
             //);
         }
 
+        public async Task<(string Name, string Surname)> GetPassengerNameAsync(string passengerId)
+        {
+            // içende bu passenge olan booking'i bul
+            var booking = await _bookingCollection.Find(x=> x.Passengers.Any(p => p.PassengerId == passengerId)).FirstOrDefaultAsync();
+
+            if (booking == null)
+                return (null, null);
+
+            //booking içinden passenger'ı çek
+            var passenger = booking.Passengers.FirstOrDefault(p => p.PassengerId == passengerId);
+
+            if (passenger == null)
+                return (null, null);
+
+            // Name - Surname dön
+            return (passenger.Name, passenger.Surname);
+        }
+
         private async Task<string> GenerateUniquePnrAsync()
         {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
