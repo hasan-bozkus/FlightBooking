@@ -35,5 +35,10 @@ namespace FlightBooking.Areas.Admin.Controllers
             ViewBag.Gate = gate;
             return View();
         }
+
+        public async Task<IActionResult> Index()
+        {
+            return View();
+        }
     }
 }
