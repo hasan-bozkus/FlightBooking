@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using FlightBooking.Dtos.CheckInDtos;
 using FlightBooking.Entities;
 using FlightBooking.Services.BookingServices;
+using FlightBooking.Services.CheckInServices;
 using FlightBooking.Settings;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
@@ -10,10 +12,12 @@ namespace FlightBooking.Areas.Admin.Controllers
     public class AdminCheckInController : Controller
     {
         private readonly IBookingService _bookingService;
+        private readonly ICheckInService _checkInService;
 
-        public AdminCheckInController(IBookingService bookingService)
+        public AdminCheckInController(IBookingService bookingService, ICheckInService checkInService)
         {
             _bookingService = bookingService;
+            _checkInService = checkInService;
         }
 
         [Area("Admin")]
@@ -36,9 +40,11 @@ namespace FlightBooking.Areas.Admin.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Index()
+        [HttpPost]
+        public async Task<IActionResult> Index(CompleteCheckInDto completeCheckInDto)
         {
-            return View();
+            await _checkInService.CompleteCheckInAsync(completeCheckInDto);
+            return RedirectToAction("Test");
         }
     }
 }

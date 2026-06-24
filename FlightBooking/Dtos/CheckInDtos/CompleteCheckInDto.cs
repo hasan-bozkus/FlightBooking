@@ -11,6 +11,6 @@
         public string? MealType { get; set; }
 
         public List<string>? ExtraServices { get; set; }
-        public string? ExtraTotalPrice { get; set; }
+        public decimal ExtraTotalPrice { get; set; }
     }
 }
