@@ -28,6 +28,11 @@ namespace FlightBooking.Areas.Admin.Controllers
             var passenger = await _bookingService.GetPassengerNameAsync(id);
             ViewBag.PassengerName = passenger.Name + " " + passenger.Surname;
 
+            var pnr = await _bookingService.GetPnrByPassengerIdAsync(id);
+            ViewBag.PnrNumber = pnr;
+
+            var gate = await _bookingService.GetGateByPassengerIdAsync(id);
+            ViewBag.Gate = gate;
             return View();
         }
     }

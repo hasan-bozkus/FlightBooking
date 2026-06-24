@@ -11,5 +11,8 @@ namespace FlightBooking.Services.BookingServices
         //Task UpdateBookingAsync(UpdateBookingDto updateBookingDto);
 
         Task<(string Name, string Surname)> GetPassengerNameAsync(string passengerId);
+
+        Task<string> GetPnrByPassengerIdAsync(string passengerId);
+        Task<string> GetGateByPassengerIdAsync(string passengerId);
     }
 }
