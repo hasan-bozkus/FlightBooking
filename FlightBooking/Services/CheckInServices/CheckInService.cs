@@ -22,12 +22,12 @@ namespace FlightBooking.Services.CheckInServices
 
         public async Task CompleteCheckInAsync(CompleteCheckInDto completeCheckInDto)
         {
-            var booking = await _bookingCollection.Find(x => x.Passengers.Any(p => p.PassengerId == completeCheckInDto.PassgengerId)).FirstOrDefaultAsync();
+            var booking = await _bookingCollection.Find(x => x.Passengers.Any(p => p.PassengerId == completeCheckInDto.PassengerId)).FirstOrDefaultAsync();
 
             if (booking == null)
                 throw new Exception("Booking Bulunamadı");
 
-            var passenger = booking.Passengers.FirstOrDefault(p => p.PassengerId == completeCheckInDto.PassgengerId);
+            var passenger = booking.Passengers.FirstOrDefault(p => p.PassengerId == completeCheckInDto.PassengerId);
 
             if (passenger == null)
                 throw new Exception("Yolcu Bulunamadı");
@@ -37,7 +37,7 @@ namespace FlightBooking.Services.CheckInServices
             var gates = new[] { "A1", "A2", "B5", "C3", "D7" };
             var randomGate = gates[new Random().Next(gates.Length)];
 
-            var filter = Builders<Booking>.Filter.ElemMatch(x => x.Passengers, p => p.PassengerId == completeCheckInDto.PassgengerId);
+            var filter = Builders<Booking>.Filter.ElemMatch(x => x.Passengers, p => p.PassengerId == completeCheckInDto.PassengerId);
 
             var update = Builders<Booking>.Update
                        .Set("Passengers.$.IsCheckedIn", true)
@@ -55,8 +55,8 @@ namespace FlightBooking.Services.CheckInServices
             var checkIn = new CheckIn
             {
                 CheckInId = Guid.NewGuid().ToString(),
-                PassengerId = completeCheckInDto.PassgengerId,
-                FlightId = completeCheckInDto.FilghtId,
+                PassengerId = completeCheckInDto.PassengerId,
+                FlightId = completeCheckInDto.FlightId,
                 PnrNumber = completeCheckInDto.PnrNumber,
                 CheckInDate = DateTime.Now,
                 IsCheckedIn = true,

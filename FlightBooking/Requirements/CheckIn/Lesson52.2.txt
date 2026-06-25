@@ -1,15 +1,16 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
-    Layout = "~/Areas/Admin/Views/AdminLayout/_AdminLayout.cshtml";
-       // ViewBag: FlightNumber, AirlineCode,
-       //          DepartureAirPortCode, DepartureAirPortName,
-       //          ArrivalAirPortCode, ArrivalAirPortName,
-       //          DepartureTime, ArrivalTime,
-       //          PassengerName, PnrNumber, Gate,
-       //          BasicPrice, Currency
+﻿﻿@* ============================================================
+   Areas/Admin/Views/CheckIn/Index.cshtml
+   CompleteCheckInDto: PassengerId, FlightId, PnrNumber,
+                       SeatNumber, BaggageKg, MealType,
+                       ExtraServices, ExtraTotalPrice
+============================================================ *@
 
-       string currencySymbol = ViewBag.Currency != null ? ViewBag.Currency.ToString() : "₺";
+@{
+    Layout = "~/Areas/Admin/Views/Layout/AdminLayout.cshtml";
+    ViewData["Title"] = "Check-In";
+
+    // Currency sembolünü güvenli şekilde al
+    string currencySymbol = ViewBag.Currency != null ? ViewBag.Currency.ToString() : "₺";
 }
 
 @section Styles {
@@ -284,6 +285,7 @@
 </style>
 }
 
+<main class="main-content" id="main-content">
 <div class="container-fluid px-4 py-4">
 <div class="ci-page">
 
@@ -370,7 +372,7 @@
         PassengerId, FlightId, PnrNumber: ViewBag'den sabit değer.
         SeatNumber, BaggageKg, MealType, ExtraServices, ExtraTotalPrice: JS tarafından doldurulur.
     *@
-    <form id="checkInForm" asp-area="Admin" asp-controller="AdminCheckIn" asp-action="Index" method="post">
+    <form id="checkInForm" asp-area="Admin" asp-controller="CheckIn" asp-action="Index" method="post">
 
         @* DTO hidden alanlar *@
         <input type="hidden" id="hPassengerId"     name="PassengerId"     value="@ViewBag.PassengerId" />
@@ -729,6 +731,7 @@
 
 </div>
 </div>
+</main>
 
 @* Başarı Modalı *@
 <div class="ci-modal-overlay" id="ciModal">
@@ -830,7 +833,7 @@
 ═══════════════════════════════════════════════════════════ */
 var BASE_PRICE = @(ViewBag.BasePrice != null ? ViewBag.BasePrice.ToString().Replace(',', '.') : "0");
 // ⚠️  Currency sembolünü HTML encode olmadan JS string'e aktarıyoruz.
-//     Razor @@() ifadesi HTML encode yapar, bu yüzden JS string literal olarak yazıyoruz.
+//     Razor @() ifadesi HTML encode yapar, bu yüzden JS string literal olarak yazıyoruz.
 var CURRENCY   = '@Html.Raw(currencySymbol)';
 
 var ROWS     = 20;
