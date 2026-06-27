@@ -1,6 +1,7 @@
 using FlightBooking.Services.BookingServices;
 using FlightBooking.Services.CheckInServices;
 using FlightBooking.Services.FilghtServices;
+using FlightBooking.Services.MachineLearningServices;
 using FlightBooking.Settings;
 using Microsoft.Extensions.Options;
 
@@ -14,10 +15,15 @@ builder.Services.AddScoped<IFlightService, FlightService>();
 builder.Services.AddScoped<IBookingService, BookingService>();
 builder.Services.AddScoped<ICheckInService, CheckInService>();
 
+builder.Services.AddSingleton<FlightMLService>();
+builder.Services.AddScoped<MongoFlightDataService>();
+
 builder.Services.AddScoped<IDatabaseSettings>(sp =>
 {
     return sp.GetRequiredService<IOptions<DatabaseSettings>>().Value;
 });
+
+
 
 builder.Services.AddControllersWithViews();
 
