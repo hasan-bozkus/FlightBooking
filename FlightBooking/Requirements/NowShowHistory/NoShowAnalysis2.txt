@@ -1,4 +1,4 @@
-﻿@model Dictionary<string, double>
+﻿﻿@model Dictionary<string, double>
 
 @{
     ViewData["Title"] = "No-Show Analizi";

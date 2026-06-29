@@ -16,6 +16,7 @@ builder.Services.AddScoped<IFlightService, FlightService>();
 builder.Services.AddScoped<IBookingService, BookingService>();
 builder.Services.AddScoped<ICheckInService, CheckInService>();
 builder.Services.AddScoped<NoShowService>();
+builder.Services.AddScoped<OverBookingRecommendationService>();
 
 builder.Services.AddSingleton<FlightMLService>();
 builder.Services.AddScoped<MongoFlightDataService>();

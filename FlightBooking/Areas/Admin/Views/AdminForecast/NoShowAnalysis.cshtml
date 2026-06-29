@@ -4,7 +4,7 @@
     ViewData["Title"] = "NoShowAnalysis";
     Layout = "~/Areas/Admin/Views/AdminLayout/_AdminLayout.cshtml";
 
-double avgNoShow      = Model.Count > 0 ? Model.Values.Average() : 0;
+    double avgNoShow      = Model.Count > 0 ? Model.Values.Average() : 0;
     var    riskiest       = Model.Count > 0 ? Model.OrderByDescending(x => x.Value).First() : new KeyValuePair<string,double>("—", 0);
     var    stablest       = Model.Count > 0 ? Model.OrderBy(x => x.Value).First()           : new KeyValuePair<string,double>("—", 0);
     double avgOverbooking = Math.Round(avgNoShow * 0.6, 1);
@@ -623,4 +623,3 @@ function exportCSV() {
 }
 </script>
 }
-
