@@ -1,3 +1,6 @@
+using FlightBooking.AgentServices;
+using FlightBooking.AgentServices.OpenAIServices;
+using FlightBooking.AgentSettings;
 using FlightBooking.Services.BookingServices;
 using FlightBooking.Services.CheckInServices;
 using FlightBooking.Services.FilghtServices;
@@ -28,7 +31,10 @@ builder.Services.AddScoped<IDatabaseSettings>(sp =>
 {
     return sp.GetRequiredService<IOptions<DatabaseSettings>>().Value;
 });
-
+builder.Services.AddHttpClient();
+builder.Services.Configure<OpenAISettings>(builder.Configuration.GetSection("OpenAI"));
+builder.Services.AddScoped<ITravelAgentService, TravelAgentService>();
+builder.Services.AddScoped<IOpenAIService, OpenAIService>();
 
 
 builder.Services.AddControllersWithViews();
