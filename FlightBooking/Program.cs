@@ -10,6 +10,7 @@ using FlightBooking.Services.MachineLearningServices;
 using FlightBooking.Services.NoShowServices;
 using FlightBooking.Services.OverBookingNoShowServices;
 using FlightBooking.Settings;
+using FlightBooking.Tools.WeatherTool;
 using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -39,6 +40,7 @@ builder.Services.AddScoped<ITravelAgentService, TravelAgentService>();
 builder.Services.AddScoped<IOpenAIService, OpenAIService>();
 builder.Services.AddScoped<ITravelPromptBuilder, TravelPromptBuilder>();
 builder.Services.AddScoped<IIntentDetector, TravelIntentDetector>();
+builder.Services.AddScoped<IWeatherTool, WeatherTool>();
 
 
 builder.Services.AddControllersWithViews();
