@@ -1,5 +1,7 @@
 using FlightBooking.AgentServices;
+using FlightBooking.AgentServices.IntentDetectors;
 using FlightBooking.AgentServices.OpenAIServices;
+using FlightBooking.AgentServices.PromptBuilder;
 using FlightBooking.AgentSettings;
 using FlightBooking.Services.BookingServices;
 using FlightBooking.Services.CheckInServices;
@@ -35,6 +37,8 @@ builder.Services.AddHttpClient();
 builder.Services.Configure<OpenAISettings>(builder.Configuration.GetSection("OpenAI"));
 builder.Services.AddScoped<ITravelAgentService, TravelAgentService>();
 builder.Services.AddScoped<IOpenAIService, OpenAIService>();
+builder.Services.AddScoped<ITravelPromptBuilder, TravelPromptBuilder>();
+builder.Services.AddScoped<IIntentDetector, TravelIntentDetector>();
 
 
 builder.Services.AddControllersWithViews();
