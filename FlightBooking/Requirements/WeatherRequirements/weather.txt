@@ -1,8 +1,4 @@
-﻿using FlightBooking.Dtos.WeatherDtos;
-
-namespace FlightBooking.Dtos.AgentDtos
-{
-    public class WeatherResult
+﻿  public class WeatherResult
     {
         public string City { get; set; }
         public string Country { get; set; }
@@ -15,13 +11,14 @@ namespace FlightBooking.Dtos.AgentDtos
         public double WindSpeed { get; set; }
         public string WindDirection { get; set; }
 
-        public int Visibility { get; set; }
+        public int Visibilty { get; set; }
         public int Pressure { get; set; }
 
 
-        public string Sunrise { get; set; }
+        public string Sunsire { get; set; }
         public string Sunset { get; set; }
 
-        public List<WeatherForecastResult> Forecasts { get; set; } = new();
+        public List<WeatherForecastDto> Forecast { get; set; } = new();
     }
-}
+
+    --------------------------------------------------------------------------------

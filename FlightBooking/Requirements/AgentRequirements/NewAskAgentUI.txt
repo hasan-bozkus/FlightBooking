@@ -1,4 +1,4 @@
-﻿@model AgentPromptRequestDto
+﻿﻿@model FlightBooking.Dtos.AgentDtos.AgentPromptRequestDto
 
 @{
     ViewData["Title"] = "YZ Seyahat Asistanı";

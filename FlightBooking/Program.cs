@@ -1,4 +1,6 @@
 using FlightBooking.AgentServices;
+using FlightBooking.AgentServices.CityDedectors;
+using FlightBooking.AgentServices.GooglePlacesServices;
 using FlightBooking.AgentServices.IntentDetectors;
 using FlightBooking.AgentServices.OpenAIServices;
 using FlightBooking.AgentServices.PromptBuilder;
@@ -41,6 +43,8 @@ builder.Services.AddScoped<IOpenAIService, OpenAIService>();
 builder.Services.AddScoped<ITravelPromptBuilder, TravelPromptBuilder>();
 builder.Services.AddScoped<IIntentDetector, TravelIntentDetector>();
 builder.Services.AddScoped<IWeatherTool, WeatherTool>();
+builder.Services.AddScoped<ICityExtractor, OpenAICityExtractor>();
+builder.Services.AddScoped<IGooglePlacesService, GooglePlacesService>();
 
 
 builder.Services.AddControllersWithViews();
@@ -69,7 +73,7 @@ app.MapControllerRoute(
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}")
+    pattern: "{controller=Agent}/{action=AskAgent}/{id?}")
     .WithStaticAssets();
 
 
