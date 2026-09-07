@@ -1,0 +1,59 @@
+﻿public class AirportSerachResponse
+    {
+        [JsonPropertyName("status")]
+        public bool Status { get; set; }
+
+        [JsonPropertyName("message")]
+        public string? Message { get; set; }
+
+        [JsonPropertyName("data")]
+        public List<AirportSerachData> Data { get; set; }
+    }
+
+    ------------------------------------------------
+
+        public class AirportSerachData
+    {
+        [JsonPropertyName("id")]
+        public string? Id { get; set; }
+
+        [JsonPropertyName("type")]
+        public string? Type { get; set; }
+
+        [JsonPropertyName("title")]
+        public string? Title { get; set; }
+
+        [JsonPropertyName("subtitle")]
+        public string? SubTitle { get; set; }
+
+        [JsonPropertyName("city")]
+        public string? City { get; set; }
+
+        [JsonPropertyName("list")]
+        public List<AirportItem> List { get; set; }
+    }
+
+    -------------------------------------------------
+
+    public class AirportItem
+    {
+        [JsonPropertyName("id")]
+        public string? Id { get; set; }
+
+        [JsonPropertyName("type")]
+        public string? Type { get; set; }
+
+        [JsonPropertyName("title")]
+        public string? Title { get; set; }
+
+        [JsonPropertyName("subtitle")]
+        public string? SubTitle { get; set; }
+
+        [JsonPropertyName("city")]
+        public string? City { get; set; }
+
+        [JsonPropertyName("distance")]
+        public string? Distance { get; set; }
+    }
+
+    --------------------------------------------------
