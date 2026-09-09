@@ -15,12 +15,13 @@ namespace FlightBooking.AgentServices
         private readonly IWeatherTool _weatherTool;
         private readonly ICityExtractor _cityExtractor;
 
-        public TravelAgentService(IOpenAIService openAIService, IIntentDetector intentDetector, IWeatherTool weatherTool, ICityExtractor cityExtractor)
+        public TravelAgentService(IOpenAIService openAIService, IIntentDetector intentDetector, IWeatherTool weatherTool, ICityExtractor cityExtractor, ITravelPromptBuilder travelPromptBuilder)
         {
             _openAIService = openAIService;
             _intentDetector = intentDetector;
             _weatherTool = weatherTool;
             _cityExtractor = cityExtractor;
+            _travelPromptBuilder = travelPromptBuilder;
         }
 
         public async Task<AgentResponseDto> AskAgentAsync(string prompt)
